@@ -7,7 +7,9 @@
       name="description"
       content="Site institucional da StackTrace, estudio de tecnologia focado em interfaces, sistemas web e produtos digitais."
     />
+    <meta name="theme-color" content="#151515" />
     <title>StackTrace</title>
+    <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       rel="stylesheet"
@@ -17,12 +19,11 @@
   <body>
     <header class="site-header" data-header>
       <a class="brand" href="#inicio" aria-label="Ir para o inicio">
-          <img src="src/assets/logo-bear.png" alt="" style="width: 40px;" />
-        
+        <img class="brand-logo" src="src/assets/logo-bear.png" alt="" />
         <span>StackTrace</span>
       </a>
 
-      <nav class="nav" aria-label="Navegacao principal">
+      <nav class="nav" id="site-navigation" aria-label="Navegacao principal" data-nav>
         <a href="#servicos">Servicos</a>
         <a href="#projetos">Projetos</a>
         <a href="#processo">Processo</a>
@@ -30,6 +31,16 @@
       </nav>
 
       <a class="header-action" href="mailto:contato@bryanlamanna.com.br">Fale conosco</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="site-navigation"
+        data-menu-toggle
+      >
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
     </header>
 
     <main>
@@ -87,7 +98,7 @@
           </div>
 
           <figure class="services-visual reveal">
-            <img src="src/assets/services-origami-bear.png" alt="" />
+            <img src="src/assets/services-origami-bear.png" alt="" loading="lazy" decoding="async" />
           </figure>
         </div>
 
@@ -268,9 +279,13 @@
       <div class="footer-main">
         <div class="footer-brand">
           <a class="brand" href="#inicio" aria-label="Ir para o inicio">
-            
-              <img src="src/assets/logo-bear.png" alt=""  style="width: 50px;"/>
-            
+            <img
+              class="brand-logo brand-logo-footer"
+              src="src/assets/logo-bear.png"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
             <span>StackTrace</span>
           </a>
           <p>Estudio de tecnologia criando interfaces, landing pages e sistemas web com identidade consistente.</p>

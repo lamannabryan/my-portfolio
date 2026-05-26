@@ -1,5 +1,7 @@
 const header = document.querySelector("[data-header]");
 const year = document.querySelector("[data-year]");
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const menuIcon = menuToggle?.querySelector("i");
 const navLinks = Array.from(document.querySelectorAll(".nav a"));
 const revealItems = Array.from(document.querySelectorAll(".reveal"));
 const scrollPanels = Array.from(document.querySelectorAll("[data-scroll-panel]"));
@@ -14,6 +16,19 @@ const sections = navLinks
 const updateHeader = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
 };
+
+const setMenuOpen = (isOpen) => {
+  header?.classList.toggle("is-menu-open", isOpen);
+  menuToggle?.setAttribute("aria-expanded", String(isOpen));
+  menuToggle?.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+
+  if (menuIcon) {
+    menuIcon.classList.toggle("fa-bars", !isOpen);
+    menuIcon.classList.toggle("fa-xmark", isOpen);
+  }
+};
+
+const closeMenu = () => setMenuOpen(false);
 
 const updateActiveLink = () => {
   let current = sections[0];
@@ -125,15 +140,52 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
-window.addEventListener("scroll", () => {
+menuToggle?.addEventListener("click", () => {
+  setMenuOpen(!header?.classList.contains("is-menu-open"));
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
+
+document.addEventListener("click", (event) => {
+  if (header?.classList.contains("is-menu-open") && !header.contains(event.target)) {
+    closeMenu();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMenu();
+  }
+});
+
+let scrollFrame = null;
+
+const updateScrollState = () => {
   updateHeader();
   updateActiveLink();
   updateScrollPanels();
   updateProjectsProgress();
   updateProcessProgress();
-});
+  scrollFrame = null;
+};
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (scrollFrame === null) {
+      scrollFrame = window.requestAnimationFrame(updateScrollState);
+    }
+  },
+  { passive: true },
+);
 
 window.addEventListener("resize", () => {
+  if (window.innerWidth > 980) {
+    closeMenu();
+  }
+
   updateScrollPanels();
   updateProjectsProgress();
   updateProcessProgress();
