@@ -9,6 +9,7 @@ const projectsSection = document.querySelector("[data-projects-scroll]");
 const projectCards = Array.from(document.querySelectorAll("[data-project-card]"));
 const processSection = document.querySelector("[data-process-scroll]");
 const processCards = Array.from(document.querySelectorAll("[data-process-card]"));
+const mobileScrollPanelQuery = window.matchMedia("(max-width: 980px)");
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -87,10 +88,17 @@ const updateActiveLink = () => {
 };
 
 const updateScrollPanels = () => {
+  const isMobileScrollPanel = mobileScrollPanelQuery.matches;
+
   scrollPanels.forEach((panel, index) => {
     const track = panel.querySelector("[data-scroll-track]");
 
     if (!track) {
+      return;
+    }
+
+    if (isMobileScrollPanel) {
+      track.style.removeProperty("--panel-shift");
       return;
     }
 
