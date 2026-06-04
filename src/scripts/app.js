@@ -12,6 +12,48 @@ const processCards = Array.from(document.querySelectorAll("[data-process-card]")
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
+const initialImageSources = ["src/assets/hero-origami-bear.png", "src/assets/logo-bear.png"];
+const loadingStartedAt = Date.now();
+
+const preloadImage = (source) =>
+  new Promise((resolve) => {
+    const image = new Image();
+
+    const finish = () => resolve();
+
+    image.onload = () => {
+      if (typeof image.decode === "function") {
+        image.decode().catch(() => undefined).finally(finish);
+        return;
+      }
+
+      finish();
+    };
+
+    image.onerror = finish;
+    image.src = source;
+
+    if (image.complete) {
+      image.onload();
+    }
+  });
+
+const showPage = () => {
+  const minimumLoaderTime = 650;
+  const remainingTime = Math.max(minimumLoaderTime - (Date.now() - loadingStartedAt), 0);
+
+  window.setTimeout(() => {
+    document.documentElement.classList.remove("is-loading");
+    document.documentElement.classList.add("is-ready");
+  }, remainingTime);
+};
+
+const initialImagesReady = Promise.all(initialImageSources.map(preloadImage));
+const loaderFallback = new Promise((resolve) => {
+  window.setTimeout(resolve, 4000);
+});
+
+Promise.race([initialImagesReady, loaderFallback]).then(showPage);
 
 const updateHeader = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
