@@ -37,10 +37,26 @@
       </a>
 
       <nav class="nav" id="site-navigation" aria-label="Navegação principal" data-nav>
-        <a href="#servicos">Serviços</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#processo">Processo</a>
-        <a href="#contato">Contato</a>
+        <a href="#servicos" data-menu-link>
+          <span>Serviços</span>
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+        </a>
+        <a href="#projetos" data-menu-link>
+          <span>Projetos</span>
+          <i class="fa-solid fa-window-restore" aria-hidden="true"></i>
+        </a>
+        <a href="#processo" data-menu-link>
+          <span>Processo</span>
+          <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+        </a>
+        <a href="#contato" data-menu-link>
+          <span>Contato</span>
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+        </a>
+        <a class="nav-contact" href="mailto:contato@bryanlamanna.com.br" data-menu-link>
+          <span>Fale conosco</span>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
       </nav>
 
       <a class="header-action" href="mailto:contato@bryanlamanna.com.br">Fale conosco</a>
@@ -55,6 +71,7 @@
         <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
     </header>
+    <div class="menu-backdrop" data-menu-backdrop aria-hidden="true"></div>
 
     <main>
       <section class="hero" id="inicio" aria-labelledby="hero-title">

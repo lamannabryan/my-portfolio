@@ -1,8 +1,11 @@
 const header = document.querySelector("[data-header]");
 const year = document.querySelector("[data-year]");
+const nav = document.querySelector("[data-nav]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const menuIcon = menuToggle?.querySelector("i");
-const navLinks = Array.from(document.querySelectorAll(".nav a"));
+const menuBackdrop = document.querySelector("[data-menu-backdrop]");
+const menuLinks = Array.from(document.querySelectorAll("[data-menu-link]"));
+const navLinks = Array.from(document.querySelectorAll(".nav a[href^='#']"));
 const revealItems = Array.from(document.querySelectorAll(".reveal"));
 const scrollPanels = Array.from(document.querySelectorAll("[data-scroll-panel]"));
 const projectsSection = document.querySelector("[data-projects-scroll]");
@@ -60,18 +63,50 @@ const updateHeader = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
 };
 
-const setMenuOpen = (isOpen) => {
-  header?.classList.toggle("is-menu-open", isOpen);
-  menuToggle?.setAttribute("aria-expanded", String(isOpen));
-  menuToggle?.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+const syncMenuAccessibility = (isOpen = header?.classList.contains("is-menu-open")) => {
+  if (!nav) {
+    return;
+  }
 
-  if (menuIcon) {
-    menuIcon.classList.toggle("fa-bars", !isOpen);
-    menuIcon.classList.toggle("fa-xmark", isOpen);
+  const shouldHideMenu = mobileScrollPanelQuery.matches && !isOpen;
+
+  nav.inert = shouldHideMenu;
+  nav.toggleAttribute("inert", shouldHideMenu);
+
+  if (shouldHideMenu) {
+    nav.setAttribute("aria-hidden", "true");
+  } else {
+    nav.removeAttribute("aria-hidden");
   }
 };
 
-const closeMenu = () => setMenuOpen(false);
+const setMenuOpen = (isOpen, options = {}) => {
+  const shouldOpen = Boolean(isOpen && mobileScrollPanelQuery.matches);
+
+  header?.classList.toggle("is-menu-open", shouldOpen);
+  document.documentElement.classList.toggle("is-menu-open", shouldOpen);
+  document.body.classList.toggle("is-menu-open", shouldOpen);
+  menuToggle?.setAttribute("aria-expanded", String(shouldOpen));
+  menuToggle?.setAttribute("aria-label", shouldOpen ? "Fechar menu" : "Abrir menu");
+  syncMenuAccessibility(shouldOpen);
+
+  if (menuIcon) {
+    menuIcon.classList.toggle("fa-bars", !shouldOpen);
+    menuIcon.classList.toggle("fa-xmark", shouldOpen);
+  }
+
+  if (shouldOpen && options.focusFirst) {
+    window.setTimeout(() => {
+      menuLinks[0]?.focus({ preventScroll: true });
+    }, 160);
+  }
+
+  if (!shouldOpen && options.returnFocus) {
+    menuToggle?.focus({ preventScroll: true });
+  }
+};
+
+const closeMenu = (options = {}) => setMenuOpen(false, options);
 
 const updateActiveLink = () => {
   let current = sections[0];
@@ -165,6 +200,7 @@ updateActiveLink();
 updateScrollPanels();
 updateProjectsProgress();
 updateProcessProgress();
+syncMenuAccessibility();
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -191,11 +227,15 @@ if ("IntersectionObserver" in window) {
 }
 
 menuToggle?.addEventListener("click", () => {
-  setMenuOpen(!header?.classList.contains("is-menu-open"));
+  setMenuOpen(!header?.classList.contains("is-menu-open"), { focusFirst: true });
 });
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", closeMenu);
+menuLinks.forEach((link) => {
+  link.addEventListener("click", () => closeMenu());
+});
+
+menuBackdrop?.addEventListener("click", () => {
+  closeMenu({ returnFocus: true });
 });
 
 document.addEventListener("click", (event) => {
@@ -206,7 +246,30 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    closeMenu();
+    closeMenu({ returnFocus: true });
+    return;
+  }
+
+  if (
+    event.key === "Tab" &&
+    mobileScrollPanelQuery.matches &&
+    header?.classList.contains("is-menu-open")
+  ) {
+    const focusableItems = [menuToggle, ...menuLinks].filter(Boolean);
+    const firstItem = focusableItems[0];
+    const lastItem = focusableItems[focusableItems.length - 1];
+
+    if (!firstItem || !lastItem) {
+      return;
+    }
+
+    if (event.shiftKey && document.activeElement === firstItem) {
+      event.preventDefault();
+      lastItem.focus();
+    } else if (!event.shiftKey && document.activeElement === lastItem) {
+      event.preventDefault();
+      firstItem.focus();
+    }
   }
 });
 
@@ -236,6 +299,7 @@ window.addEventListener("resize", () => {
     closeMenu();
   }
 
+  syncMenuAccessibility();
   updateScrollPanels();
   updateProjectsProgress();
   updateProcessProgress();
