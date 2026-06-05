@@ -22,12 +22,8 @@
     <link rel="stylesheet" href="src/styles/app.css" />
   </head>
   <body>
-    <div class="page-loader" role="status" aria-live="polite">
-      <div class="page-loader-mark" aria-hidden="true">
-        <img src="src/assets/logo-bear.png" alt="" />
-        <span></span>
-      </div>
-      <strong>Carregando</strong>
+    <div class="page-loader" role="status" aria-live="polite" aria-label="Carregando">
+      <div class="page-loader-mark" aria-hidden="true"></div>
     </div>
 
     <header class="site-header" data-header>
@@ -332,24 +328,37 @@
 
         <form
           class="contact-form reveal"
-          action="mailto:contato@bryanlamanna.com.br"
+          action="https://formsubmit.co/lamannabryan@gmail.com"
+          data-contact-form
+          data-contact-endpoint="https://formsubmit.co/ajax/lamannabryan@gmail.com"
           method="post"
-          enctype="text/plain"
         >
+          <input type="hidden" name="_subject" value="Novo contato pelo site _StackTrace" />
+          <input type="hidden" name="_template" value="table" />
+          <input
+            type="hidden"
+            name="_autoresponse"
+            value="Recebemos sua mensagem. Em breve a _StackTrace retorna com os proximos passos."
+          />
+          <label class="contact-hidden-field" aria-hidden="true">
+            <span>Website</span>
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+          </label>
+
           <div class="form-row">
             <label>
               <span>Nome</span>
-              <input type="text" name="nome" placeholder="Nome completo" required />
+              <input type="text" name="name" placeholder="Nome completo" autocomplete="name" required />
             </label>
             <label>
               <span>Email</span>
-              <input type="email" name="email" placeholder="email@empresa.com" required />
+              <input type="email" name="email" placeholder="email@empresa.com" autocomplete="email" required />
             </label>
           </div>
 
           <label>
             <span>Tipo de projeto</span>
-            <select name="tipo-de-projeto" required>
+            <select name="tipo_de_projeto" required>
               <option value="">Selecione uma opção</option>
               <option value="Landing page">Landing page</option>
               <option value="Interface web">Interface web</option>
@@ -361,13 +370,14 @@
           <label>
             <span>Mensagem</span>
             <textarea
-              name="mensagem"
+              name="message"
               rows="5"
               placeholder="Descreva objetivo, prazo e principais referências."
               required
             ></textarea>
           </label>
 
+          <p class="form-status" data-contact-status role="status" aria-live="polite" hidden></p>
           <button class="button button-primary" type="submit">Enviar mensagem</button>
         </form>
       </section>
@@ -407,7 +417,7 @@
               <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
             </a>
          
-            <a href="mailto:contato@bryanlamanna.com.br" aria-label="Email">
+            <a href="mailto:lamannabryan@gmail.com" aria-label="Email">
               <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
           </div>

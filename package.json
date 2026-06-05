@@ -1,14 +1,6 @@
 {
   "name": "portfolio-stacktrace",
   "version": "1.0.0",
-  "description": "Portfolio da StackTrace servido por uma aplicacao Node.js.",
-  "private": true,
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
-  },
-  "engines": {
-    "node": ">=18"
-  }
+  "description": "Portfolio estatico da StackTrace para GitHub Pages.",
+  "private": true
 }

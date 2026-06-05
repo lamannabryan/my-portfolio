@@ -12,6 +12,8 @@ const projectsSection = document.querySelector("[data-projects-scroll]");
 const projectCards = Array.from(document.querySelectorAll("[data-project-card]"));
 const processSection = document.querySelector("[data-process-scroll]");
 const processCards = Array.from(document.querySelectorAll("[data-process-card]"));
+const contactForm = document.querySelector("[data-contact-form]");
+const contactStatus = document.querySelector("[data-contact-status]");
 const mobileScrollPanelQuery = window.matchMedia("(max-width: 980px)");
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
@@ -107,6 +109,66 @@ const setMenuOpen = (isOpen, options = {}) => {
 };
 
 const closeMenu = (options = {}) => setMenuOpen(false, options);
+
+const setContactStatus = (message, state = "idle") => {
+  if (!contactStatus) {
+    return;
+  }
+
+  contactStatus.textContent = message;
+  contactStatus.dataset.state = state;
+  contactStatus.hidden = !message;
+};
+
+const setContactSubmitting = (isSubmitting) => {
+  const submitButton = contactForm?.querySelector("button[type='submit']");
+
+  if (!submitButton) {
+    return;
+  }
+
+  if (!submitButton.dataset.defaultText) {
+    submitButton.dataset.defaultText = submitButton.textContent.trim();
+  }
+
+  submitButton.disabled = isSubmitting;
+  submitButton.textContent = isSubmitting ? "Enviando..." : submitButton.dataset.defaultText;
+};
+
+const handleContactSubmit = async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(contactForm);
+
+  if (String(formData.get("_honey") || "").trim()) {
+    contactForm.reset();
+    setContactStatus("Mensagem enviada com sucesso.", "success");
+    return;
+  }
+
+  setContactSubmitting(true);
+  setContactStatus("Enviando mensagem...", "loading");
+
+  try {
+    const response = await fetch(contactForm.dataset.contactEndpoint || contactForm.action, {
+      body: formData,
+      method: "POST",
+    });
+    const result = await response.json().catch(() => ({}));
+    const success = response.ok && (result.success || result.message || result.status === "success");
+
+    if (!success) {
+      throw new Error(result.message || "Nao foi possivel enviar a mensagem.");
+    }
+
+    contactForm.reset();
+    setContactStatus("Mensagem enviada com sucesso. Em breve entraremos em contato.", "success");
+  } catch (error) {
+    setContactStatus(error.message || "Nao foi possivel enviar a mensagem.", "error");
+  } finally {
+    setContactSubmitting(false);
+  }
+};
 
 const updateActiveLink = () => {
   let current = sections[0];
@@ -237,6 +299,8 @@ menuLinks.forEach((link) => {
 menuBackdrop?.addEventListener("click", () => {
   closeMenu({ returnFocus: true });
 });
+
+contactForm?.addEventListener("submit", handleContactSubmit);
 
 document.addEventListener("click", (event) => {
   if (header?.classList.contains("is-menu-open") && !header.contains(event.target)) {
