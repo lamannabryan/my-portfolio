@@ -400,17 +400,46 @@ section {
 }
 
 .title-mark {
-  display: inline;
+  --title-mark-background: var(--red);
+  position: relative;
+  z-index: 0;
+  display: inline-block;
   padding: 0 0.08em 0.06em;
   color: var(--white);
-  background: var(--red);
+  background: transparent;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+  isolation: isolate;
   line-height: 0.98;
 }
 
+.title-mark::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: var(--title-mark-background);
+  pointer-events: none;
+}
+
+.title-mark::after {
+  display: inline-block;
+  margin-left: 0.04em;
+  content: "_";
+  font-weight: 1000;
+  text-shadow: 0.025em 0 currentColor, -0.025em 0 currentColor;
+  transform: translateY(-10px);
+  animation: title-mark-caret 1s steps(1, end) infinite;
+}
+
+@keyframes title-mark-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
 .title-mark-orange {
-  background: var(--orange);
+  --title-mark-background: var(--orange);
 }
 
 .hero-copy p:not(.eyebrow) {
@@ -1028,7 +1057,7 @@ section {
 }
 
 .process .title-mark-orange {
-  background: linear-gradient(135deg, var(--orange), #2dd4bf);
+  --title-mark-background: linear-gradient(135deg, var(--orange), #2dd4bf);
 }
 
 .process-grid {
@@ -2058,6 +2087,11 @@ section {
   .page-loader-mark {
     animation: none;
     transition: none;
+  }
+
+  .title-mark::after {
+    animation: none;
+    opacity: 1;
   }
 
   .process-card,
