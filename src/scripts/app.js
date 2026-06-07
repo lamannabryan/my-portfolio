@@ -235,24 +235,50 @@ const updateProjectsProgress = () => {
   });
 };
 
+let isProcessStatic = false;
+
 const updateProcessProgress = () => {
   if (!processSection) {
     return;
   }
 
+  if (mobileScrollPanelQuery.matches) {
+    if (!isProcessStatic) {
+      processSection.style.setProperty("--process-progress", "1");
+
+      processCards.forEach((card) => {
+        card.style.setProperty("--process-card-progress", "1");
+        card.classList.remove("is-process-active");
+      });
+
+      isProcessStatic = true;
+    }
+
+    return;
+  }
+
+  isProcessStatic = false;
+
   const rect = processSection.getBoundingClientRect();
   const scrollable = Math.max(rect.height - window.innerHeight, 1);
   const sectionProgress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+  const cardCount = processCards.length;
+  const activeIndex = Math.min(Math.max(Math.floor(sectionProgress * cardCount), 0), cardCount - 1);
+  const easeProgress = (value) => value * value * (3 - 2 * value);
 
   processSection.style.setProperty("--process-progress", sectionProgress.toFixed(3));
 
   processCards.forEach((card, index) => {
-    const start = index * 0.18;
-    const duration = 0.28;
+    const start = cardCount > 1 ? index * (0.58 / (cardCount - 1)) : 0;
+    const duration = 0.34;
     const rawProgress = (sectionProgress - start) / duration;
-    const progress = Math.min(Math.max(rawProgress, 0), 1);
+    const progress = easeProgress(Math.min(Math.max(rawProgress, 0), 1));
+    const center = cardCount > 1 ? index / (cardCount - 1) : 0;
+    const rawFocus = 1 - Math.min(Math.abs(sectionProgress - center) / 0.32, 1);
+    const focus = easeProgress(Math.max(rawFocus, 0));
 
     card.style.setProperty("--process-card-progress", progress.toFixed(3));
+    card.classList.toggle("is-process-active", index === activeIndex || focus > 0.64);
   });
 };
 

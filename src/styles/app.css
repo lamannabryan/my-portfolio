@@ -488,6 +488,11 @@ section {
   text-transform: uppercase;
 }
 
+.services-panel {
+  margin-top: clamp(36px, 6vw, 76px);
+  padding-bottom: 0;
+}
+
 .services-panel span:nth-child(3n + 1) {
   background: var(--red);
 }
@@ -954,15 +959,47 @@ section {
 }
 
 .process {
-  color: var(--white);
-  background: var(--ink);
+  --process-progress: 0;
+  position: relative;
+  isolation: isolate;
   width: 100%;
   max-width: none;
   min-height: 330vh;
   padding-top: 0;
-  padding-bottom: 0;
   padding-right: max(16px, calc((100vw - 1180px) / 2));
+  padding-bottom: 0;
   padding-left: max(16px, calc((100vw - 1180px) / 2));
+  overflow: clip;
+  color: var(--white);
+  background:
+    linear-gradient(115deg, rgba(226, 26, 89, 0.18), transparent 38%),
+    linear-gradient(245deg, rgba(45, 212, 191, 0.1), transparent 36%),
+    linear-gradient(180deg, #151515 0%, #1b1619 48%, #151515 100%);
+}
+
+.process::before,
+.process::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.process::before {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.034) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+  background-size: 110px 110px;
+  opacity: 0.38;
+}
+
+.process::after {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent),
+    linear-gradient(180deg, rgba(21, 21, 21, 0), rgba(21, 21, 21, 0.52) 92%);
+  opacity: 0.28;
 }
 
 .process-stage {
@@ -976,82 +1013,233 @@ section {
   overflow: hidden;
 }
 
+.process .section-heading {
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(42px, 6vw, 76px);
+}
+
+.process .section-heading h2 {
+  max-width: 940px;
+}
+
 .process .eyebrow {
-  color: var(--orange);
+  color: #2dd4bf;
+}
+
+.process .title-mark-orange {
+  background: linear-gradient(135deg, var(--orange), #2dd4bf);
 }
 
 .process-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.18);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 32px;
+  background: transparent;
+}
+
+.process-grid::before,
+.process-grid::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  content: "";
+  border-radius: 999px;
+}
+
+.process-grid::before {
+  right: 0;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.process-grid::after {
+  right: 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--red), var(--orange), #2dd4bf);
+  box-shadow: 0 0 18px rgba(45, 212, 191, 0.22);
+  transform: scaleX(var(--process-progress));
+  transform-origin: left center;
+  transition: transform 120ms linear;
 }
 
 .process-card {
   --process-card-progress: 0;
-  min-height: 280px;
-  padding: 26px;
+  --process-accent: var(--red);
+  --process-accent-rgb: 226, 26, 89;
+  position: relative;
+  display: flex;
+  min-height: 318px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(24px, 2.5vw, 32px);
+  overflow: hidden;
+  color: var(--white);
   background:
     linear-gradient(
-      135deg,
-      rgba(226, 93, 31, calc(var(--process-card-progress) * 0.22)),
-      rgba(255, 255, 255, 0.02)
+      145deg,
+      rgba(var(--process-accent-rgb), 0.12),
+      rgba(255, 255, 255, 0.035) 42%,
+      rgba(255, 255, 255, 0.065)
     ),
-    var(--ink);
-  opacity: 1;
-  filter: blur(calc((1 - var(--process-card-progress)) * 14px));
+    rgba(21, 21, 21, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  opacity: calc(0.42 + var(--process-card-progress) * 0.58);
   transform:
-    translateY(calc((1 - var(--process-card-progress)) * 62px))
-    scale(calc(0.9 + var(--process-card-progress) * 0.1));
+    translateY(calc((1 - var(--process-card-progress)) * 42px))
+    scale(calc(0.96 + var(--process-card-progress) * 0.04));
+  transform-origin: center bottom;
   transition:
     opacity 120ms linear,
-    filter 120ms linear,
     transform 120ms linear,
-    background 120ms linear;
+    border-color 120ms linear,
+    box-shadow 160ms ease;
+  will-change: opacity, transform;
+}
+
+.process-card.reveal:not(.is-visible) {
+  opacity: 0;
+  filter: none;
+  transform: translateY(34px);
+}
+
+.process-card.reveal.is-visible {
+  opacity: calc(0.42 + var(--process-card-progress) * 0.58);
+  transform:
+    translateY(calc((1 - var(--process-card-progress)) * 42px))
+    scale(calc(0.96 + var(--process-card-progress) * 0.04));
+}
+
+.process-card:nth-child(2) {
+  --process-accent: var(--orange);
+  --process-accent-rgb: 226, 93, 31;
+}
+
+.process-card:nth-child(3) {
+  --process-accent: #2dd4bf;
+  --process-accent-rgb: 45, 212, 191;
+}
+
+.process-card:nth-child(4) {
+  --process-accent: #f6b73c;
+  --process-accent-rgb: 246, 183, 60;
+}
+
+.process-card::before,
+.process-card::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
 }
 
 .process-card::before {
-  display: block;
-  width: calc(var(--process-card-progress) * 100%);
-  height: 3px;
-  margin: -26px -26px 23px;
-  content: "";
-  background: var(--orange);
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--process-accent), rgba(255, 255, 255, 0.82));
+  box-shadow: 0 0 16px rgba(var(--process-accent-rgb), 0.26);
+  transform: scaleX(var(--process-card-progress));
+  transform-origin: left center;
+}
+
+.process-card::after {
+  inset: 0;
+  z-index: 1;
+  border: 1px solid rgba(var(--process-accent-rgb), 0.32);
+  border-radius: inherit;
+  opacity: 0.36;
+  transform: scaleX(var(--process-card-progress));
+  transform-origin: left center;
+}
+
+.process-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .process-card strong {
-  color: color-mix(in srgb, #292929 calc((1 - var(--process-card-progress)) * 100%), var(--orange));
-  font-size: 0.9rem;
-  opacity: calc(0.32 + var(--process-card-progress) * 0.68);
-  transition: color 120ms linear, opacity 120ms linear;
+  align-self: flex-start;
+  min-height: 34px;
+  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(var(--process-accent-rgb), 0.14);
+  border: 1px solid rgba(var(--process-accent-rgb), 0.26);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 34px;
+  transition: color 120ms linear, background 120ms linear, border-color 120ms linear;
+}
+
+.process-card i {
+  position: absolute;
+  top: clamp(22px, 2.5vw, 30px);
+  right: clamp(22px, 2.5vw, 30px);
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  color: var(--process-accent);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  font-size: 1.18rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  opacity: calc(0.42 + var(--process-card-progress) * 0.58);
+  transform:
+    translateY(calc((1 - var(--process-card-progress)) * 10px));
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    opacity 120ms linear,
+    transform 120ms linear;
+}
+
+.process-card.is-process-active i {
+  color: var(--white);
+  background: linear-gradient(135deg, rgba(var(--process-accent-rgb), 0.96), rgba(255, 255, 255, 0.16));
+  border-color: rgba(var(--process-accent-rgb), 0.46);
+}
+
+.process-card.is-process-active {
+  border-color: rgba(var(--process-accent-rgb), 0.42);
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.process-card.is-process-active::after {
+  opacity: 0.58;
+}
+
+.process-card.is-process-active strong {
+  background: rgba(var(--process-accent-rgb), 0.24);
+  border-color: rgba(var(--process-accent-rgb), 0.42);
 }
 
 .process-card h3 {
-  color: color-mix(in srgb, #2a2a2a calc((1 - var(--process-card-progress)) * 100%), var(--white));
-  margin: 74px 0 16px;
-  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
-  transition: color 120ms linear;
+  margin: auto 0 16px;
+  padding-top: 88px;
+  color: var(--white);
+  font-size: clamp(1.46rem, 2.4vw, 2.16rem);
+  line-height: 1.02;
+  text-wrap: balance;
+  transition: color 120ms linear, transform 120ms linear;
+  transform: translateY(calc((1 - var(--process-card-progress)) * 18px));
 }
 
 .process-card p {
-  color: color-mix(
-    in srgb,
-    #242424 calc((1 - var(--process-card-progress)) * 100%),
-    rgba(255, 255, 255, 0.68)
-  );
-  transition: color 120ms linear;
-}
-
-@supports not (color: color-mix(in srgb, black, white)) {
-  .process-card {
-    opacity: calc(0.28 + var(--process-card-progress) * 0.72);
-  }
-
-  .process-card strong,
-  .process-card h3,
-  .process-card p {
-    color: rgba(255, 255, 255, calc(0.12 + var(--process-card-progress) * 0.76));
-  }
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.94rem, 1.15vw, 1.02rem);
+  font-weight: 650;
+  transition: color 120ms linear, transform 120ms linear;
+  transform: translateY(calc((1 - var(--process-card-progress)) * 12px));
 }
 
 .stack-band {
@@ -1523,6 +1711,10 @@ section {
     padding: 78px max(16px, calc((100vw - 1180px) / 2));
   }
 
+  .process .section-heading {
+    margin-bottom: 34px;
+  }
+
   .process-stage {
     position: relative;
     top: auto;
@@ -1534,35 +1726,63 @@ section {
 
   .process-grid {
     gap: 12px;
+    padding-top: 26px;
     background: transparent;
+    perspective: none;
   }
 
   .process-card {
-    min-height: 0;
+    min-height: 220px;
     filter: none;
     transform: none;
     background:
-      linear-gradient(135deg, rgba(226, 93, 31, 0.18), rgba(255, 255, 255, 0.03)),
-      var(--ink);
+      linear-gradient(135deg, rgba(var(--process-accent-rgb), 0.18), rgba(255, 255, 255, 0.045)),
+      rgba(21, 21, 21, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
     opacity: 1;
+  }
+
+  .process-card.reveal,
+  .process-card.reveal:not(.is-visible),
+  .process-card.reveal.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 
   .process-card::before {
     width: 100%;
+    transform: none;
+  }
+
+  .process-card::after {
+    opacity: 0.66;
+    transform: none;
   }
 
   .process-card strong {
-    color: var(--orange);
+    color: var(--white);
+    background: rgba(var(--process-accent-rgb), 0.2);
+    border-color: rgba(var(--process-accent-rgb), 0.36);
     opacity: 1;
   }
 
+  .process-card i {
+    opacity: 1;
+    transform: none;
+  }
+
   .process-card h3 {
+    margin: 52px 0 14px;
+    padding-top: 0;
     color: var(--white);
+    transform: none;
   }
 
   .process-card p {
     color: rgba(255, 255, 255, 0.68);
+    transform: none;
   }
 
   .project-row {
@@ -1780,11 +2000,20 @@ section {
   }
 
   .process-card h3 {
-    margin-top: 42px;
+    margin: 42px 0 14px;
+    padding-top: 0;
+  }
+
+  .process-card i {
+    top: 22px;
+    right: 22px;
+    width: 46px;
+    height: 46px;
+    font-size: 1.02rem;
   }
 
   .process-card::before {
-    margin: -22px -22px 20px;
+    margin: 0;
   }
 
   .contact {
@@ -1829,5 +2058,29 @@ section {
   .page-loader-mark {
     animation: none;
     transition: none;
+  }
+
+  .process-card,
+  .process-card::before,
+  .process-card::after,
+  .process-card i,
+  .process-card h3,
+  .process-card p,
+  .process-grid::after {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .process-card {
+    opacity: 1;
+  }
+
+  .process-card.reveal,
+  .process-card.reveal:not(.is-visible),
+  .process-card.reveal.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }
