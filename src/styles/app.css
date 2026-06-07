@@ -860,7 +860,28 @@ section {
   letter-spacing: 0;
 }
 
-.projects-intro > p {
+.projects-intro-note {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  margin: 0 0 8px;
+}
+
+.projects-intro-logo {
+  display: block;
+  width: clamp(78px, 10vw, 112px);
+  height: clamp(78px, 10vw, 112px);
+  object-fit: contain;
+  filter: drop-shadow(0 16px 24px rgba(21, 21, 21, 0.2));
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.projects-intro-logo:hover {
+  filter: drop-shadow(0 22px 30px rgba(21, 21, 21, 0.28));
+  transform: translate(-5px, -5px);
+}
+
+.projects-intro-note p {
   margin: 0 0 8px;
   color: var(--muted);
   font-size: 1.04rem;
@@ -2141,6 +2162,11 @@ section {
 
   .services-visual img {
     transform: none;
+  }
+
+  .projects-intro-logo {
+    transform: none;
+    transition: none;
   }
 
   .process-card,
