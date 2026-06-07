@@ -157,6 +157,10 @@ a {
   line-height: 1;
 }
 
+.stacktrace-trace {
+  color: var(--red);
+}
+
 .brand-logo {
   display: block;
   width: 42px;
@@ -339,6 +343,9 @@ textarea:focus-visible {
 }
 
 .hero {
+  --hero-image-opacity: 1;
+  --hero-image-size: min(90vw, 78%);
+  --hero-parallax: 0px;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 0.36fr);
@@ -350,19 +357,40 @@ textarea:focus-visible {
   padding: 126px max(16px, calc((100vw - 1180px) / 2)) 72px;
   color: var(--white);
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(21, 21, 21, 0.96), rgba(21, 21, 21, 0.595) 46%, rgba(21, 21, 21, 0)),
-    linear-gradient(180deg, rgba(21, 21, 21, 0), rgba(21, 21, 21, 0)),
-    url("../assets/hero-origami-bear.png") center / cover;
+  background: var(--ink);
+  isolation: isolate;
 }
 
 .hero::before {
   position: absolute;
   inset: 22px;
+  z-index: 2;
   content: "";
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   pointer-events: none;
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  background:
+    linear-gradient(
+      90deg,
+      var(--ink) 0%,
+      rgba(21, 21, 21, 0.98) 38%,
+      rgba(21, 21, 21, 0.68) 62%,
+      rgba(21, 21, 21, 0.04) 100%
+    ),
+    linear-gradient(180deg, rgba(21, 21, 21, 0.02), rgba(21, 21, 21, 0.58)),
+    url("../assets/hero-origami-bear.png") right top / var(--hero-image-size) auto no-repeat;
+  opacity: var(--hero-image-opacity);
+  pointer-events: none;
+  transform: translate3d(0, var(--hero-parallax), 0);
+  transform-origin: right top;
+  will-change: transform;
 }
 
 .hero-copy {
@@ -426,8 +454,8 @@ section {
   display: inline-block;
   margin-left: 0.04em;
   content: "_";
-  font-weight: 1000;
-  text-shadow: 0.025em 0 currentColor, -0.025em 0 currentColor;
+  font-weight: 800;
+  text-shadow: 0.014em 0 currentColor, -0.014em 0 currentColor;
   transform: translateY(-10px);
   animation: title-mark-caret 1s steps(1, end) infinite;
 }
@@ -492,6 +520,7 @@ section {
   overflow: clip;
   color: var(--white);
   background: var(--ink);
+  box-shadow: 0 24px 70px rgba(21, 21, 21, 0.24);
 }
 
 .scroll-panel-track {
@@ -505,20 +534,22 @@ section {
 }
 
 .scroll-panel span {
-  flex: 0 0 clamp(170px, 20vw, 280px);
+  flex: 0 0 clamp(132px, 14vw, 210px);
   min-height: 64px;
   display: grid;
+  gap: 8px;
   place-items: center;
-  padding: 0 18px;
+  padding: 0 12px;
   background: rgba(255, 255, 255, 0.045);
-  font-size: clamp(.8rem, 1.8vw, 1rem);
+  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
   font-weight: 900;
+  line-height: 1.12;
   text-align: center;
   text-transform: uppercase;
 }
 
 .services-panel {
-  margin-top: clamp(36px, 6vw, 76px);
+  margin-top: clamp(56px, 8vw, 112px);
   padding-bottom: 0;
 }
 
@@ -601,6 +632,7 @@ section {
 }
 
 .services-visual {
+  --services-image-parallax: 0px;
   position: relative;
   min-height: 520px;
   margin: 0;
@@ -621,11 +653,15 @@ section {
 }
 
 .services-visual img {
+  position: absolute;
+  inset: -48px 0;
+  z-index: 0;
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 520px;
+  height: calc(100% + 96px);
   object-fit: cover;
+  transform: translate3d(0, var(--services-image-parallax), 0);
+  will-change: transform;
 }
 
 .section-heading h2,
@@ -1002,7 +1038,7 @@ section {
   color: var(--white);
   background:
     linear-gradient(115deg, rgba(226, 26, 89, 0.18), transparent 38%),
-    linear-gradient(245deg, rgba(45, 212, 191, 0.1), transparent 36%),
+    linear-gradient(245deg, rgba(226, 93, 31, 0.12), transparent 36%),
     linear-gradient(180deg, #151515 0%, #1b1619 48%, #151515 100%);
 }
 
@@ -1053,11 +1089,11 @@ section {
 }
 
 .process .eyebrow {
-  color: #2dd4bf;
+  color: var(--orange);
 }
 
 .process .title-mark-orange {
-  --title-mark-background: linear-gradient(135deg, var(--orange), #2dd4bf);
+  --title-mark-background: linear-gradient(135deg, var(--orange), var(--red));
 }
 
 .process-grid {
@@ -1088,8 +1124,8 @@ section {
 .process-grid::after {
   right: 0;
   width: 100%;
-  background: linear-gradient(90deg, var(--red), var(--orange), #2dd4bf);
-  box-shadow: 0 0 18px rgba(45, 212, 191, 0.22);
+  background: linear-gradient(90deg, var(--orange), var(--red));
+  box-shadow: 0 0 18px rgba(226, 26, 89, 0.24);
   transform: scaleX(var(--process-progress));
   transform-origin: left center;
   transition: transform 120ms linear;
@@ -1150,13 +1186,13 @@ section {
 }
 
 .process-card:nth-child(3) {
-  --process-accent: #2dd4bf;
-  --process-accent-rgb: 45, 212, 191;
+  --process-accent: var(--red);
+  --process-accent-rgb: 226, 26, 89;
 }
 
 .process-card:nth-child(4) {
-  --process-accent: #f6b73c;
-  --process-accent-rgb: 246, 183, 60;
+  --process-accent: var(--orange);
+  --process-accent-rgb: 226, 93, 31;
 }
 
 .process-card::before,
@@ -1697,6 +1733,7 @@ section {
   }
 
   .hero {
+    --hero-image-size: min(72vw, 680px);
     grid-template-columns: 1fr;
     padding-top: 120px;
   }
@@ -1763,31 +1800,35 @@ section {
   .process-card {
     min-height: 220px;
     filter: none;
-    transform: none;
+    transform:
+      translateY(calc((1 - var(--process-card-progress)) * 30px))
+      scale(calc(0.97 + var(--process-card-progress) * 0.03));
     background:
       linear-gradient(135deg, rgba(var(--process-accent-rgb), 0.18), rgba(255, 255, 255, 0.045)),
       rgba(21, 21, 21, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
-    opacity: 1;
+    opacity: calc(0.46 + var(--process-card-progress) * 0.54);
   }
 
   .process-card.reveal,
   .process-card.reveal:not(.is-visible),
   .process-card.reveal.is-visible {
-    opacity: 1;
+    opacity: calc(0.46 + var(--process-card-progress) * 0.54);
     filter: none;
-    transform: none;
+    transform:
+      translateY(calc((1 - var(--process-card-progress)) * 30px))
+      scale(calc(0.97 + var(--process-card-progress) * 0.03));
   }
 
   .process-card::before {
     width: 100%;
-    transform: none;
+    transform: scaleX(var(--process-card-progress));
   }
 
   .process-card::after {
-    opacity: 0.66;
-    transform: none;
+    opacity: calc(0.26 + var(--process-card-progress) * 0.4);
+    transform: scaleX(var(--process-card-progress));
   }
 
   .process-card strong {
@@ -1798,20 +1839,20 @@ section {
   }
 
   .process-card i {
-    opacity: 1;
-    transform: none;
+    opacity: calc(0.5 + var(--process-card-progress) * 0.5);
+    transform: translateY(calc((1 - var(--process-card-progress)) * 10px));
   }
 
   .process-card h3 {
     margin: 52px 0 14px;
     padding-top: 0;
     color: var(--white);
-    transform: none;
+    transform: translateY(calc((1 - var(--process-card-progress)) * 16px));
   }
 
   .process-card p {
     color: rgba(255, 255, 255, 0.68);
-    transform: none;
+    transform: translateY(calc((1 - var(--process-card-progress)) * 12px));
   }
 
   .project-row {
@@ -1893,11 +1934,11 @@ section {
   }
 
   .hero {
+    --hero-image-opacity: 0.9;
+    --hero-image-size: min(104vw, 560px);
     min-height: auto;
     padding: 112px 14px 54px;
-    background:
-      linear-gradient(180deg, rgba(21, 21, 21, 0.94), rgba(21, 21, 21, 0.72)),
-      url("../assets/hero-origami-bear.png") 58% center / cover no-repeat;
+    background: var(--ink);
   }
 
   .hero::before {
@@ -1929,7 +1970,7 @@ section {
   }
 
   .scroll-panel span {
-    flex-basis: 142px;
+    flex-basis: 116px;
     min-height: 58px;
   }
 
@@ -2092,6 +2133,14 @@ section {
   .title-mark::after {
     animation: none;
     opacity: 1;
+  }
+
+  .hero::after {
+    transform: none;
+  }
+
+  .services-visual img {
+    transform: none;
   }
 
   .process-card,

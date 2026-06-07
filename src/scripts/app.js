@@ -1,4 +1,6 @@
 const header = document.querySelector("[data-header]");
+const hero = document.querySelector(".hero");
+const servicesVisuals = Array.from(document.querySelectorAll(".services-visual"));
 const year = document.querySelector("[data-year]");
 const nav = document.querySelector("[data-nav]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
@@ -63,6 +65,29 @@ Promise.race([initialImagesReady, loaderFallback]).then(showPage);
 
 const updateHeader = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
+};
+
+const updateHeroParallax = () => {
+  if (!hero) {
+    return;
+  }
+
+  const rect = hero.getBoundingClientRect();
+  const progress = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
+  const parallax = progress * 96;
+
+  hero.style.setProperty("--hero-parallax", `${parallax.toFixed(1)}px`);
+};
+
+const updateServicesParallax = () => {
+  servicesVisuals.forEach((visual) => {
+    const rect = visual.getBoundingClientRect();
+    const total = window.innerHeight + rect.height;
+    const progress = Math.min(Math.max((window.innerHeight - rect.top) / total, 0), 1);
+    const parallax = (progress - 0.5) * 80;
+
+    visual.style.setProperty("--services-image-parallax", `${parallax.toFixed(1)}px`);
+  });
 };
 
 const syncMenuAccessibility = (isOpen = header?.classList.contains("is-menu-open")) => {
@@ -235,36 +260,41 @@ const updateProjectsProgress = () => {
   });
 };
 
-let isProcessStatic = false;
-
 const updateProcessProgress = () => {
   if (!processSection) {
     return;
   }
 
+  const easeProgress = (value) => value * value * (3 - 2 * value);
+
   if (mobileScrollPanelQuery.matches) {
-    if (!isProcessStatic) {
-      processSection.style.setProperty("--process-progress", "1");
+    const rect = processSection.getBoundingClientRect();
+    const total = window.innerHeight + rect.height;
+    const sectionProgress = Math.min(Math.max((window.innerHeight - rect.top) / total, 0), 1);
 
-      processCards.forEach((card) => {
-        card.style.setProperty("--process-card-progress", "1");
-        card.classList.remove("is-process-active");
-      });
+    processSection.style.setProperty("--process-progress", sectionProgress.toFixed(3));
 
-      isProcessStatic = true;
-    }
+    processCards.forEach((card) => {
+      const cardRect = card.getBoundingClientRect();
+      const start = window.innerHeight * 0.92;
+      const end = window.innerHeight * 0.42;
+      const rawProgress = (start - cardRect.top) / (start - end);
+      const progress = easeProgress(Math.min(Math.max(rawProgress, 0), 1));
+      const center = cardRect.top + cardRect.height * 0.5;
+      const focus = 1 - Math.min(Math.abs(center - window.innerHeight * 0.52) / (window.innerHeight * 0.38), 1);
+
+      card.style.setProperty("--process-card-progress", progress.toFixed(3));
+      card.classList.toggle("is-process-active", focus > 0.36 || progress > 0.82);
+    });
 
     return;
   }
-
-  isProcessStatic = false;
 
   const rect = processSection.getBoundingClientRect();
   const scrollable = Math.max(rect.height - window.innerHeight, 1);
   const sectionProgress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
   const cardCount = processCards.length;
   const activeIndex = Math.min(Math.max(Math.floor(sectionProgress * cardCount), 0), cardCount - 1);
-  const easeProgress = (value) => value * value * (3 - 2 * value);
 
   processSection.style.setProperty("--process-progress", sectionProgress.toFixed(3));
 
@@ -284,6 +314,8 @@ const updateProcessProgress = () => {
 
 year.textContent = new Date().getFullYear();
 updateHeader();
+updateHeroParallax();
+updateServicesParallax();
 updateActiveLink();
 updateScrollPanels();
 updateProjectsProgress();
@@ -367,6 +399,8 @@ let scrollFrame = null;
 
 const updateScrollState = () => {
   updateHeader();
+  updateHeroParallax();
+  updateServicesParallax();
   updateActiveLink();
   updateScrollPanels();
   updateProjectsProgress();
@@ -390,6 +424,8 @@ window.addEventListener("resize", () => {
   }
 
   syncMenuAccessibility();
+  updateHeroParallax();
+  updateServicesParallax();
   updateScrollPanels();
   updateProjectsProgress();
   updateProcessProgress();
