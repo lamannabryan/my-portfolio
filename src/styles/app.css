@@ -381,8 +381,8 @@ textarea:focus-visible {
       90deg,
       var(--ink) 0%,
       rgba(21, 21, 21, 0.98) 38%,
-      rgba(21, 21, 21, 0.68) 62%,
-      rgba(21, 21, 21, 0.04) 100%
+      rgba(21, 21, 21, 0.064) 62%,
+      rgba(21, 21, 21, 0) 100%
     ),
     linear-gradient(180deg, rgba(21, 21, 21, 0.02), rgba(21, 21, 21, 0.58)),
     url("../assets/hero-origami-bear.png") right top / var(--hero-image-size) auto no-repeat;
@@ -582,7 +582,7 @@ section {
 
 .services-intro {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.62fr);
+  grid-template-columns: minmax(320px, 0.62fr) minmax(0, 0.95fr);
   gap: clamp(28px, 6vw, 82px);
   align-items: center;
   margin-bottom: 44px;
@@ -863,20 +863,63 @@ section {
 .projects-intro-note {
   display: grid;
   justify-items: start;
-  gap: 18px;
+  gap: 16px;
   margin: 0 0 8px;
+}
+
+.projects-bear-walk {
+  display: flex;
+  align-items: end;
+  gap: clamp(8px, 1.2vw, 14px);
+  min-height: clamp(82px, 9vw, 112px);
+}
+
+.projects-walk-frame {
+  display: block;
+  width: clamp(76px, 8.5vw, 104px);
+  aspect-ratio: 1;
+  opacity: 0.18;
+  animation: projects-bear-loop 3s ease-in-out infinite;
+}
+
+.projects-walk-frame:first-child {
+  width: clamp(82px, 9.1vw, 112px);
+}
+
+.projects-walk-frame:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.projects-walk-frame:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes projects-bear-loop {
+  0% {
+    opacity: 0.18;
+  }
+
+  10%,
+  28% {
+    opacity: 1;
+  }
+
+  43%,
+  100% {
+    opacity: 0.18;
+  }
 }
 
 .projects-intro-logo {
   display: block;
-  width: clamp(78px, 10vw, 112px);
-  height: clamp(78px, 10vw, 112px);
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 16px 24px rgba(21, 21, 21, 0.2));
   transition: filter 180ms ease, transform 180ms ease;
 }
 
-.projects-intro-logo:hover {
+.projects-bear-walk:hover .projects-intro-logo {
   filter: drop-shadow(0 22px 30px rgba(21, 21, 21, 0.28));
   transform: translate(-5px, -5px);
 }
@@ -2162,6 +2205,14 @@ section {
 
   .services-visual img {
     transform: none;
+  }
+
+  .projects-walk-frame {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
   }
 
   .projects-intro-logo {
