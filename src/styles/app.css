@@ -1938,8 +1938,13 @@ section {
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-panel::-webkit-scrollbar {
+    display: none;
   }
 
   .scroll-panel-track {
@@ -1950,6 +1955,15 @@ section {
 
   .scroll-panel span {
     scroll-snap-align: start;
+  }
+
+  .projects-intro-note,
+  .projects-bear-walk {
+    width: 100%;
+  }
+
+  .projects-bear-walk {
+    justify-content: space-between;
   }
 }
 
@@ -1999,10 +2013,15 @@ section {
 
   .hero {
     --hero-image-opacity: 0.9;
-    --hero-image-size: min(104vw, 560px);
+    --hero-image-size: max(620px, 154vw);
     min-height: auto;
     padding: 112px 14px 54px;
     background: var(--ink);
+  }
+
+  .hero::after {
+    background-position: 0 0, 0 0, 58% top;
+    background-size: auto, auto, var(--hero-image-size) auto;
   }
 
   .hero::before {
@@ -2055,6 +2074,10 @@ section {
   .contact h2 {
     font-size: clamp(2rem, 11vw, 3.25rem);
     line-height: 0.96;
+  }
+
+  .title-mark::after {
+    transform: none;
   }
 
   .section-heading,

@@ -17,6 +17,7 @@ const processCards = Array.from(document.querySelectorAll("[data-process-card]")
 const contactForm = document.querySelector("[data-contact-form]");
 const contactStatus = document.querySelector("[data-contact-status]");
 const mobileScrollPanelQuery = window.matchMedia("(max-width: 980px)");
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -235,6 +236,67 @@ const updateScrollPanels = () => {
   });
 };
 
+let scrollPanelCarouselTimer = null;
+
+const stopScrollPanelCarousel = () => {
+  if (scrollPanelCarouselTimer === null) {
+    return;
+  }
+
+  window.clearInterval(scrollPanelCarouselTimer);
+  scrollPanelCarouselTimer = null;
+};
+
+const advanceScrollPanelCarousel = () => {
+  scrollPanels.forEach((panel) => {
+    const track = panel.querySelector("[data-scroll-track]");
+    const items = track ? Array.from(track.children) : [];
+
+    if (!track || items.length < 2) {
+      return;
+    }
+
+    const currentLeft = panel.scrollLeft;
+    const maxLeft = Math.max(panel.scrollWidth - panel.clientWidth, 0);
+    const snapPoints = Array.from(
+      new Set([
+        ...items.map((item) => Math.min(item.offsetLeft, maxLeft)),
+        maxLeft,
+      ]),
+    ).sort((a, b) => a - b);
+
+    if (maxLeft <= 0 || snapPoints.length < 2) {
+      return;
+    }
+
+    const currentIndex = snapPoints.reduce((closestIndex, point, index) => {
+      const closestDistance = Math.abs(snapPoints[closestIndex] - currentLeft);
+      const distance = Math.abs(point - currentLeft);
+
+      return distance < closestDistance ? index : closestIndex;
+    }, 0);
+    const nextPoint = snapPoints[(currentIndex + 1) % snapPoints.length];
+
+    panel.scrollTo({
+      left: nextPoint,
+      behavior: "smooth",
+    });
+  });
+};
+
+const syncScrollPanelCarousel = () => {
+  stopScrollPanelCarousel();
+
+  if (!mobileScrollPanelQuery.matches || reducedMotionQuery.matches || !scrollPanels.length) {
+    scrollPanels.forEach((panel) => {
+      panel.scrollLeft = 0;
+    });
+    return;
+  }
+
+  scrollPanelCarouselTimer = window.setInterval(advanceScrollPanelCarousel, 2200);
+};
+
 const updateProjectsProgress = () => {
   if (!projectsSection) {
     return;
@@ -243,7 +305,8 @@ const updateProjectsProgress = () => {
   const rect = projectsSection.getBoundingClientRect();
   const total = window.innerHeight + rect.height;
   const sectionProgress = Math.min(Math.max((window.innerHeight - rect.top) / total, 0), 1);
-  const parallax = (sectionProgress - 0.5) * 320;
+  const parallaxRange = mobileScrollPanelQuery.matches ? 120 : 190;
+  const parallax = sectionProgress * parallaxRange;
 
   projectsSection.style.setProperty("--projects-progress", sectionProgress.toFixed(3));
   projectsSection.style.setProperty("--projects-parallax", `${parallax.toFixed(1)}px`);
@@ -318,6 +381,7 @@ updateHeroParallax();
 updateServicesParallax();
 updateActiveLink();
 updateScrollPanels();
+syncScrollPanelCarousel();
 updateProjectsProgress();
 updateProcessProgress();
 syncMenuAccessibility();
@@ -427,6 +491,10 @@ window.addEventListener("resize", () => {
   updateHeroParallax();
   updateServicesParallax();
   updateScrollPanels();
+  syncScrollPanelCarousel();
   updateProjectsProgress();
   updateProcessProgress();
 });
+
+reducedMotionQuery.addEventListener?.("change", syncScrollPanelCarousel);
+mobileScrollPanelQuery.addEventListener?.("change", syncScrollPanelCarousel);
