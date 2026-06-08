@@ -11,6 +11,7 @@ const navLinks = Array.from(document.querySelectorAll(".nav a[href^='#']"));
 const revealItems = Array.from(document.querySelectorAll(".reveal"));
 const scrollPanels = Array.from(document.querySelectorAll("[data-scroll-panel]"));
 const projectsSection = document.querySelector("[data-projects-scroll]");
+const projectsShowcase = document.querySelector(".projects-showcase");
 const projectCards = Array.from(document.querySelectorAll("[data-project-card]"));
 const processSection = document.querySelector("[data-process-scroll]");
 const processCards = Array.from(document.querySelectorAll("[data-process-card]"));
@@ -196,18 +197,116 @@ const handleContactSubmit = async (event) => {
   }
 };
 
-const updateActiveLink = () => {
-  let current = sections[0];
+const setActiveNavLink = (targetId) => {
+  navLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === targetId;
+    link.classList.toggle("is-active", isCurrent);
 
-  sections.forEach((section) => {
-    if (section.offsetTop <= window.scrollY + 180) {
-      current = section;
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
     }
   });
+};
 
-  navLinks.forEach((link) => {
-    link.classList.toggle("is-active", current?.id === link.getAttribute("href").slice(1));
+let pendingNavTarget = "";
+let pendingNavTargetTimer = null;
+
+const clearPendingNavTarget = () => {
+  pendingNavTarget = "";
+
+  if (pendingNavTargetTimer !== null) {
+    window.clearTimeout(pendingNavTargetTimer);
+    pendingNavTargetTimer = null;
+  }
+};
+
+const setPendingNavTarget = (targetId) => {
+  clearPendingNavTarget();
+  pendingNavTarget = targetId || "";
+
+  if (pendingNavTarget) {
+    pendingNavTargetTimer = window.setTimeout(() => {
+      clearPendingNavTarget();
+      updateActiveLink();
+    }, 2000);
+  }
+};
+
+const getViewportTrackingPoint = () => {
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const headerBottom = header
+    ? Math.min(Math.max(header.getBoundingClientRect().bottom, 0), viewportHeight)
+    : 0;
+  const usableHeight = Math.max(viewportHeight - headerBottom, 1);
+
+  return {
+    viewportHeight,
+    viewportTop: headerBottom,
+    readingLine: headerBottom + usableHeight * 0.42,
+  };
+};
+
+const getActiveSection = () => {
+  if (!sections.length) {
+    return null;
+  }
+
+  const { viewportHeight, viewportTop, readingLine } = getViewportTrackingPoint();
+  const documentHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+  );
+
+  if (window.scrollY + viewportHeight >= documentHeight - 2) {
+    return sections[sections.length - 1];
+  }
+
+  const sectionAtReadingLine = sections.find((section) => {
+    const rect = section.getBoundingClientRect();
+    return rect.top <= readingLine && rect.bottom > readingLine;
   });
+
+  if (sectionAtReadingLine) {
+    return sectionAtReadingLine;
+  }
+
+  const visibleMatch = sections.reduce(
+    (closest, section) => {
+      const rect = section.getBoundingClientRect();
+      const visibleHeight = Math.max(
+        Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, viewportTop),
+        0,
+      );
+
+      if (visibleHeight > closest.visibleHeight) {
+        return { section, visibleHeight };
+      }
+
+      return closest;
+    },
+    { section: null, visibleHeight: 0 },
+  );
+  const minimumVisibleHeight = Math.min(viewportHeight * 0.28, 220);
+
+  return visibleMatch.visibleHeight >= minimumVisibleHeight ? visibleMatch.section : null;
+};
+
+const updateActiveLink = () => {
+  const current = getActiveSection();
+  const currentTarget = current ? `#${current.id}` : "";
+
+  if (pendingNavTarget && currentTarget !== pendingNavTarget) {
+    setActiveNavLink(pendingNavTarget);
+    return;
+  }
+
+  if (pendingNavTarget) {
+    clearPendingNavTarget();
+  }
+
+  setActiveNavLink(currentTarget);
 };
 
 const updateScrollPanels = () => {
@@ -302,14 +401,25 @@ const updateProjectsProgress = () => {
     return;
   }
 
+  const clampProgress = (value) => Math.min(Math.max(value, 0), 1);
   const rect = projectsSection.getBoundingClientRect();
   const total = window.innerHeight + rect.height;
-  const sectionProgress = Math.min(Math.max((window.innerHeight - rect.top) / total, 0), 1);
-  const parallaxRange = mobileScrollPanelQuery.matches ? 120 : 190;
-  const parallax = sectionProgress * parallaxRange;
+  const sectionProgress = clampProgress((window.innerHeight - rect.top) / total);
+
+  if (projectsShowcase) {
+    const showcaseRect = projectsShowcase.getBoundingClientRect();
+    const viewportCenter = window.innerHeight * 0.5;
+    const showcaseCenter = showcaseRect.top + showcaseRect.height * 0.5;
+    const travelDistance = window.innerHeight * 0.5 + showcaseRect.height * 0.5;
+    const rawParallax = (viewportCenter - showcaseCenter) / Math.max(travelDistance, 1);
+    const parallaxProgress = Math.min(Math.max(rawParallax, -1), 1);
+    const parallaxRange = mobileScrollPanelQuery.matches ? 34 : 58;
+    const parallax = parallaxProgress * parallaxRange;
+
+    projectsShowcase.style.setProperty("--projects-showcase-shift", `${parallax.toFixed(1)}px`);
+  }
 
   projectsSection.style.setProperty("--projects-progress", sectionProgress.toFixed(3));
-  projectsSection.style.setProperty("--projects-parallax", `${parallax.toFixed(1)}px`);
 
   projectCards.forEach((card, index) => {
     const cardRect = card.getBoundingClientRect();
@@ -414,6 +524,15 @@ menuToggle?.addEventListener("click", () => {
   setMenuOpen(!header?.classList.contains("is-menu-open"), { focusFirst: true });
 });
 
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const targetId = link.getAttribute("href");
+
+    setPendingNavTarget(targetId);
+    setActiveNavLink(targetId);
+  });
+});
+
 menuLinks.forEach((link) => {
   link.addEventListener("click", () => closeMenu());
 });
@@ -482,6 +601,13 @@ window.addEventListener(
   { passive: true },
 );
 
+window.addEventListener("scrollend", () => {
+  if (pendingNavTarget) {
+    clearPendingNavTarget();
+    updateActiveLink();
+  }
+});
+
 window.addEventListener("resize", () => {
   if (window.innerWidth > 980) {
     closeMenu();
@@ -490,6 +616,7 @@ window.addEventListener("resize", () => {
   syncMenuAccessibility();
   updateHeroParallax();
   updateServicesParallax();
+  updateActiveLink();
   updateScrollPanels();
   syncScrollPanelCarousel();
   updateProjectsProgress();

@@ -614,6 +614,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: space-evenly;
   margin-top: 28px;
 }
 
@@ -932,27 +933,40 @@ section {
 }
 
 .projects-showcase {
+  --projects-showcase-shift: 0px;
   position: relative;
   height: 220px;
   margin: 0 0 26px;
   overflow: hidden;
   border-radius: 8px;
-  background:
-    linear-gradient(90deg, rgba(21, 21, 21, 0.18), rgba(21, 21, 21, 0.04)),
-    url("../assets/projects-showcase.png") center calc(50% + var(--projects-parallax, 0px)) / cover
-      no-repeat,
-    var(--ink);
+  background: var(--ink);
   box-shadow: var(--shadow);
+  isolation: isolate;
 }
 
 .projects-showcase::before {
   position: absolute;
   inset: 16px;
-  z-index: 1;
+  z-index: 2;
   content: "";
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   pointer-events: none;
+}
+
+.projects-showcase::after {
+  position: absolute;
+  inset: -42px 0;
+  z-index: 1;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(21, 21, 21, 0.2), rgba(21, 21, 21, 0.04)),
+    url("../assets/projects-showcase.png") center center / cover no-repeat;
+  pointer-events: none;
+  transform: translate3d(0, var(--projects-showcase-shift), 0) scale(1.035);
+  transform-origin: center center;
+  transition: transform 80ms linear;
+  will-change: transform;
 }
 
 .project-list {
@@ -1622,7 +1636,8 @@ section {
   .site-header {
     grid-template-columns: auto 1fr auto auto;
     gap: 8px;
-    min-height: 64px;
+    min-height: 72px;
+    padding: 12px;
   }
 
   body.is-menu-open .site-header {
@@ -1654,16 +1669,16 @@ section {
 
   .nav {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 12px);
     right: 0;
     left: 0;
     z-index: 2;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
-    max-height: calc(100vh - 104px);
-    max-height: calc(100dvh - 104px);
-    padding: 14px;
+    gap: 12px;
+    max-height: calc(100vh - 116px);
+    max-height: calc(100dvh - 116px);
+    padding: 16px;
     overflow-y: auto;
     color: var(--white);
     background:
@@ -1691,8 +1706,8 @@ section {
   .nav a,
   .nav a.is-active {
     justify-content: space-between;
-    min-height: 46px;
-    padding: 0 12px 0 16px;
+    min-height: 52px;
+    padding: 0 14px 0 18px;
     color: rgba(255, 255, 255, 0.9);
     background: rgba(255, 255, 255, 0.075);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1740,9 +1755,11 @@ section {
 
   .nav a i {
     display: grid;
-    width: 34px;
-    height: 34px;
+    order: initial;
+    width: 38px;
+    height: 38px;
     place-items: center;
+    margin-right: 0;
     margin-left: 14px;
     color: rgba(255, 255, 255, 0.78);
     background: rgba(255, 255, 255, 0.08);
@@ -1761,7 +1778,7 @@ section {
 
   .nav .nav-contact {
     display: flex;
-    min-height: 58px;
+    min-height: 62px;
     margin-top: 4px;
     color: var(--white);
     background: linear-gradient(135deg, var(--red), var(--orange));
@@ -1778,6 +1795,9 @@ section {
 
   .menu-toggle {
     display: grid;
+    width: 48px;
+    height: 48px;
+    font-size: 1.06rem;
   }
 
   .site-header.is-menu-open .menu-toggle {
@@ -1971,8 +1991,8 @@ section {
   .site-header {
     top: 0;
     width: 100%;
-    min-height: 58px;
-    padding: 8px;
+    min-height: 66px;
+    padding: 10px;
     border-right: 0;
     border-left: 0;
     border-radius: 0;
@@ -1993,27 +2013,26 @@ section {
   }
 
   .menu-toggle {
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
   }
 
   .nav {
     grid-template-columns: 1fr;
-    top: calc(100% + 8px);
-    right: 10px;
+    top: calc(100% + 10px);
+    right: 0;
     left: 10px;
-    max-height: calc(100vh - 78px);
-    max-height: calc(100dvh - 78px);
-    padding: 12px;
+    max-height: calc(100vh - 88px);
+    max-height: calc(100dvh - 88px);
+    padding: 14px;
   }
 
   .nav a {
-    min-height: 56px;
+    min-height: 58px;
   }
 
   .hero {
-    --hero-image-opacity: 0.9;
-    --hero-image-size: auto 100%;
+    --hero-image-opacity: 0.34;
     min-height: 100vh;
     min-height: 100svh;
     padding: 112px 14px 54px;
@@ -2021,8 +2040,8 @@ section {
   }
 
   .hero::after {
-    background-position: 0 0, 0 0, 58% top;
-    background-size: auto, auto, var(--hero-image-size);
+    background: url("../assets/hero-origami-bear.png") center center / cover no-repeat;
+    transform: none;
   }
 
   .hero::before {
@@ -2240,6 +2259,11 @@ section {
   }
 
   .projects-intro-logo {
+    transform: none;
+    transition: none;
+  }
+
+  .projects-showcase::after {
     transform: none;
     transition: none;
   }
