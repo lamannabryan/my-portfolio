@@ -2013,15 +2013,16 @@ section {
 
   .hero {
     --hero-image-opacity: 0.9;
-    --hero-image-size: max(620px, 154vw);
-    min-height: auto;
+    --hero-image-size: auto 100%;
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 112px 14px 54px;
     background: var(--ink);
   }
 
   .hero::after {
     background-position: 0 0, 0 0, 58% top;
-    background-size: auto, auto, var(--hero-image-size) auto;
+    background-size: auto, auto, var(--hero-image-size);
   }
 
   .hero::before {
