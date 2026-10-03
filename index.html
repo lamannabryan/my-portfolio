@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#151515" />
     <title>_StackTrace</title>
     <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg" />
-    <link rel="preload" as="image" href="src/assets/hero-origami-bear.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="src/assets/hero-origami-bear_resultado.webp" fetchpriority="high" />
     <link rel="preload" as="image" href="src/assets/logo-bear.png" />
     <script>
       document.documentElement.classList.add("is-loading");
@@ -20,6 +20,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/styles/app.css" />
+    <link rel="stylesheet" href="src/styles/projects.css" />
   </head>
   <body>
     <div class="page-loader" role="status" aria-live="polite" aria-label="Carregando">
@@ -92,7 +93,7 @@
       <section class="section services" id="servicos" style="margin-bottom: 0; padding-bottom: 0;">
         <div class="services-intro">
           <figure class="services-visual reveal">
-            <img src="src/assets/services-studio.png" alt="" loading="lazy" decoding="async" />
+            <img src="src/assets/services-studio_resultado.webp" alt="" loading="lazy" decoding="async" />
           </figure>
 
           <div class="services-copy reveal">
@@ -207,7 +208,7 @@
               <span class="projects-walk-frame">
                 <img
                   class="projects-intro-logo"
-                  src="src/assets/logo-bear-walk-2.png"
+                  src="src/assets/logo-bear-walk-2_resultado.webp"
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -217,7 +218,7 @@
               <span class="projects-walk-frame">
                 <img
                   class="projects-intro-logo"
-                  src="src/assets/logo-bear-walk-1.png"
+                  src="src/assets/logo-bear-walk-1_resultado.webp"
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -227,7 +228,7 @@
               <span class="projects-walk-frame">
                 <img
                   class="projects-intro-logo"
-                  src="src/assets/logo-bear-walk-0.png"
+                  src="src/assets/logo-bear-walk-0_resultado.webp"
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -243,7 +244,32 @@
           </div>
         </div>
 
-        <div class="projects-showcase reveal" aria-label="Visual dos projetos"></div>
+        <div class="featured-projects" aria-label="Aplicações em destaque">
+          <a class="featured-project featured-project-fat" href="projetos/fat/">
+            <div class="featured-project-image">
+              <img src="src/assets/projects/fat/01-dashboard-da-rede_resultado.webp" width="3200" height="2240" alt="Dashboard do FAT com indicadores e comparativo de faturamento das lojas" loading="lazy" decoding="async" />
+              <span class="featured-project-type">Gestão e inteligência de dados</span>
+            </div>
+            <div class="featured-project-copy">
+              <span class="eyebrow">01 / Aplicação web</span>
+              <h3>FAT<span aria-hidden="true">↗</span></h3>
+              <p>Uma visão completa da rede de farmácias: faturamento, associados, desempenho das lojas e análises com IA.</p>
+              <span class="featured-project-link">Conhecer o FAT <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="featured-project featured-project-score" href="projetos/score/">
+            <div class="featured-project-image">
+              <img src="src/assets/projects/score/07-dashboard-de-scores_resultado.webp" width="3200" height="2240" alt="Dashboard do Score com pontuações e classificação das unidades" loading="lazy" decoding="async" />
+              <span class="featured-project-type">Auditoria e padrão operacional</span>
+            </div>
+            <div class="featured-project-copy">
+              <span class="eyebrow">02 / Aplicação web</span>
+              <h3>Score<span aria-hidden="true">↗</span></h3>
+              <p>Auditorias guiadas por 36 critérios, com evidências em fotos e pontuação para acompanhar cada unidade da rede.</p>
+              <span class="featured-project-link">Conhecer o Score <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </div>
 
         <div class="project-list" data-project-list>
           <article class="project-row reveal" data-project-card>
@@ -456,6 +482,8 @@
           <strong>Mapa</strong>
           <a href="#servicos">Serviços</a>
           <a href="#projetos">Projetos</a>
+          <a href="projetos/fat/">FAT</a>
+          <a href="projetos/score/">Score</a>
           <a href="#processo">Processo</a>
           <a href="#contato">Contato</a>
         </nav>

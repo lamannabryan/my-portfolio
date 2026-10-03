@@ -6,6 +6,11 @@ const rootDir = __dirname;
 const port = Number(process.env.PORT) || 3000;
 const host = process.env.HOST || "0.0.0.0";
 
+const projectPages = new Map([
+  ["/projetos/fat", "projetos/fat/index.html"],
+  ["/projetos/score", "projetos/score/index.html"],
+]);
+
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
@@ -40,6 +45,12 @@ const getFilePath = (pathname) => {
     return path.join(rootDir, "index.html");
   }
 
+  for (const [route, file] of projectPages) {
+    if (pathname === `${route}/` || pathname === `${route}/index.html`) {
+      return path.join(rootDir, file);
+    }
+  }
+
   if (pathname.startsWith("/src/")) {
     return resolveInsideRoot(pathname);
   }
@@ -55,13 +66,21 @@ const server = http.createServer(async (request, response) => {
     });
   }
 
+  let requestUrl;
   let pathname;
 
   try {
-    pathname = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
+    requestUrl = new URL(request.url, `http://${request.headers.host}`);
+    pathname = decodeURIComponent(requestUrl.pathname);
   } catch {
     return send(response, 400, "Requisicao invalida", {
       "Content-Type": "text/plain; charset=utf-8",
+    });
+  }
+
+  if (projectPages.has(pathname)) {
+    return send(response, 308, undefined, {
+      Location: `${pathname}/${requestUrl.search}`,
     });
   }
 

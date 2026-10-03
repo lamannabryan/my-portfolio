@@ -22,7 +22,10 @@ const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
-const initialImageSources = ["src/assets/hero-origami-bear.png", "src/assets/logo-bear.png"];
+const initialImageSources = Array.from(
+  document.querySelectorAll('link[rel="preload"][as="image"]'),
+  (link) => link.href,
+);
 const loadingStartedAt = Date.now();
 
 const preloadImage = (source) =>

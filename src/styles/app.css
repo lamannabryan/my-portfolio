@@ -378,7 +378,7 @@ textarea:focus-visible {
       rgba(21, 21, 21, 0) 100%
     ),
     linear-gradient(180deg, rgba(21, 21, 21, 0.02), rgba(21, 21, 21, 0.58)),
-    url("../assets/hero-origami-bear.png") right top / var(--hero-image-size) auto no-repeat;
+    url("../assets/hero-origami-bear_resultado.webp") right top / var(--hero-image-size) auto no-repeat;
   opacity: var(--hero-image-opacity);
   pointer-events: none;
   transform: translate3d(0, var(--hero-parallax), 0);
@@ -954,7 +954,7 @@ section {
   content: "";
   background:
     linear-gradient(90deg, rgba(21, 21, 21, 0.2), rgba(21, 21, 21, 0.04)),
-    url("../assets/projects-showcase.png") center center / cover no-repeat;
+    url("../assets/projects-showcase_resultado.webp") center center / cover no-repeat;
   pointer-events: none;
   transform: translate3d(0, var(--projects-showcase-shift), 0) scale(1.035);
   transform-origin: center center;
@@ -2033,7 +2033,7 @@ section {
   }
 
   .hero::after {
-    background: url("../assets/hero-origami-bear.png") center center / cover no-repeat;
+    background: url("../assets/hero-origami-bear_resultado.webp") center center / cover no-repeat;
     transform: none;
   }
 
