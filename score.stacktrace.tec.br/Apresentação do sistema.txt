@@ -1,0 +1,15 @@
+# Padronize cada unidade. Acompanhe o resultado da rede.
+
+**Uma solução de auditoria para redes de unidades que precisam transformar padrões operacionais em avaliações claras, consistentes e fáceis de acompanhar.**
+
+Com o **Sistema de Auditoria e Score para Redes de Unidades**, as equipes avaliam cada unidade por meio de critérios organizados em 12 fundamentos e recebem um score ponderado de 0 a 100. A lista de unidades destaca as notas e o status de avaliação, ajudando a visualizar o desempenho da rede e encontrar rapidamente cada unidade.
+
+Durante a auditoria, o avaliador acompanha o score e o progresso do preenchimento, registra observações e adiciona fotos quando um critério pode ser comprovado visualmente. As avaliações ficam registradas para apoiar o acompanhamento de cada unidade.
+
+- **36 critérios de avaliação** em 12 fundamentos operacionais.
+- **Pontuação automática** para respostas positivas, parciais e negativas.
+- **Busca e filtros** para localizar unidades e acompanhar avaliações pendentes.
+- **Fotos e observações** para complementar a avaliação no local.
+- **Interface responsiva** para uso no computador ou celular.
+
+**Leve mais clareza e consistência à operação das suas unidades.**

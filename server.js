@@ -9,6 +9,8 @@ const host = process.env.HOST || "0.0.0.0";
 const projectPages = new Map([
   ["/projetos/fat", "projetos/fat/index.html"],
   ["/projetos/score", "projetos/score/index.html"],
+  ["/projetos/intranet", "projetos/intranet/index.html"],
+  ["/servicos/sites", "servicos/sites/index.html"],
 ]);
 
 const mimeTypes = {

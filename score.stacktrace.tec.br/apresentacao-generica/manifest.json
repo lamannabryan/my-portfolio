@@ -1,0 +1,72 @@
+{
+  "system": "Score Rede Demonstrativa",
+  "data": "Dados inteiramente fictícios para demonstração",
+  "capturedAt": "2026-10-03T15:36:18.674Z",
+  "source": "Templates EJS, CSS e JavaScript originais do projeto, renderizados no Chrome",
+  "score": 94.75,
+  "captures": [
+    {
+      "file": "01-painel-de-lojas.png",
+      "title": "Visão geral da rede",
+      "description": "Indicadores, score médio e classificação das unidades em uma única tela.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      }
+    },
+    {
+      "file": "02-filtro-de-avaliadas.png",
+      "title": "Acompanhamento das avaliações",
+      "description": "Filtro das unidades avaliadas, com notas e faixas de classificação.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      }
+    },
+    {
+      "file": "03-auditoria-em-andamento.png",
+      "title": "Auditoria guiada",
+      "description": "12 fundamentos, 36 critérios e acompanhamento do preenchimento em tempo real.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      }
+    },
+    {
+      "file": "04-score-e-criterios.png",
+      "title": "Score e critérios detalhados",
+      "description": "Exemplo preenchido: 94,75/100. Respostas, observações e campo para evidências fotográficas.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      }
+    },
+    {
+      "file": "07-dashboard-de-scores.png",
+      "title": "Dashboard de desempenho",
+      "description": "Indicadores, classificacoes e comparativo de unidades com dados ficticios.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      }
+    },
+    {
+      "file": "05-painel-no-celular.png",
+      "title": "A rede na palma da mão",
+      "description": "Painel responsivo com indicadores, busca e filtros no celular.",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      }
+    },
+    {
+      "file": "06-auditoria-no-celular.png",
+      "title": "Auditoria durante a visita",
+      "description": "Respostas por toque, observações e campo para tirar ou escolher uma foto.",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      }
+    }
+  ]
+}

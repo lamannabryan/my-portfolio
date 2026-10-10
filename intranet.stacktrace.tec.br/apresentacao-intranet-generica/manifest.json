@@ -1,0 +1,294 @@
+{
+  "system": "Template Intranet",
+  "visualIdentity": {
+    "name": "Roxo e turquesa",
+    "purple": "#6439B8",
+    "purpleDark": "#30204F",
+    "turquoise": "#2DD4BF",
+    "turquoiseDark": "#087F78",
+    "background": "#F7F5FB"
+  },
+  "capturedAt": "2026-10-04T00:25:58.002Z",
+  "demonstrationDate": "2026-10-03",
+  "data": "Inteiramente fictícios",
+  "databaseConnected": false,
+  "source": "Views e CSS deste projeto; conteúdo sintético, identificação textual e sem logotipos.",
+  "captures": [
+    {
+      "page": "login",
+      "title": "Login",
+      "description": "A entrada da intranet com e-mail, senha e opção de recuperação de acesso.",
+      "template": "Template Acesso",
+      "mobile": false,
+      "file": "01-login.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "inicio",
+      "title": "Tela inicial do usuário",
+      "description": "Saudação, destaques e atalhos para os recursos mais usados no dia a dia.",
+      "template": "Template Intranet",
+      "mobile": false,
+      "file": "02-inicio.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2498
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "arquivos",
+      "title": "Biblioteca de arquivos",
+      "description": "Categorias e pastas organizam os materiais disponíveis para a equipe.",
+      "template": "Template Arquivos",
+      "mobile": false,
+      "file": "03-arquivos.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "documentos",
+      "title": "Documentos da unidade",
+      "description": "Visualização e download de arquivos em diferentes formatos.",
+      "template": "Template Documentos",
+      "mobile": false,
+      "file": "04-documentos.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "boletos",
+      "title": "Consulta de boletos",
+      "description": "Seleção da unidade, competência, vencimento e acesso ao último boleto.",
+      "template": "Template Financeiro",
+      "mobile": false,
+      "file": "05-boletos.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "certificado",
+      "title": "Certificado digital",
+      "description": "Validade, envio do arquivo e acompanhamento da aprovação do certificado.",
+      "template": "Template Certificados",
+      "mobile": false,
+      "file": "06-certificado.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "parceiros",
+      "title": "Diretório de parceiros",
+      "description": "Filtros por categoria, canais de pedido e contatos comerciais em um só lugar.",
+      "template": "Template Parceiros",
+      "mobile": false,
+      "file": "07-parceiros.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "comunicados",
+      "title": "Feed de comunicados",
+      "description": "Publicações internas, novidades e identificação de comunicados ainda não lidos.",
+      "template": "Template Comunicação",
+      "mobile": false,
+      "file": "08-comunicados.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "administracao",
+      "title": "Painel administrativo",
+      "description": "Acesso às áreas de gestão de usuários, documentos, parceiros e conteúdos.",
+      "template": "Template Administração",
+      "mobile": false,
+      "file": "09-administracao.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2080
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "usuarios",
+      "title": "Gestão de usuários",
+      "description": "Perfis de acesso, situação dos cadastros, filtros e ações de administração.",
+      "template": "Template Usuários",
+      "mobile": false,
+      "file": "10-usuarios.png",
+      "viewport": {
+        "width": 1600,
+        "height": 1040
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2190
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "login",
+      "title": "Login no celular",
+      "description": "A tela de entrada se adapta à navegação em dispositivos móveis.",
+      "template": "Template Acesso",
+      "mobile": true,
+      "file": "11-login-celular.png",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      },
+      "pixels": {
+        "width": 860,
+        "height": 2000
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    },
+    {
+      "page": "inicio",
+      "title": "Início no celular",
+      "description": "Os atalhos da intranet acompanham o usuário também no celular.",
+      "template": "Template Intranet",
+      "mobile": true,
+      "file": "12-inicio-celular.png",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      },
+      "pixels": {
+        "width": 860,
+        "height": 4340
+      },
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true,
+        "horizontalOverflow": false,
+        "fontsLoaded": true,
+        "externalRequests": 0
+      }
+    }
+  ]
+}

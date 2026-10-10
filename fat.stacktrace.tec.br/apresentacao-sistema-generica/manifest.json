@@ -1,0 +1,226 @@
+{
+  "system": "Gestão da Rede Demonstrativa",
+  "data": "Inteiramente fictícios",
+  "capturedAt": "2026-10-03T15:58:26.089Z",
+  "demonstrationDate": "2026-10-03T18:00:00.000Z",
+  "source": "HTML, CSS e JavaScript do projeto, renderizados no Chrome com respostas locais sintéticas",
+  "databaseConnected": false,
+  "captures": [
+    {
+      "file": "01-dashboard-da-rede.png",
+      "title": "Visão geral da rede",
+      "description": "Faturamento, compras, transações e comparação mensal das unidades.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "02-evolucao-e-consultores.png",
+      "title": "Evolução e acompanhamento",
+      "description": "Histórico mensal e faturamento por consultor, com indicadores calculados a partir dos exemplos.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "03-score-das-lojas.png",
+      "title": "Score das unidades",
+      "description": "Pontuação média, cobertura das avaliações e unidades com maior desempenho.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "04-score-e-faturamento.png",
+      "title": "Score e faturamento",
+      "description": "Gráfico de dispersão e comparação entre score atual e vendas líquidas do mês.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "05-faturamento-por-loja.png",
+      "title": "Faturamento por unidade",
+      "description": "Vendas, compras, resultado bruto, margem e ticket médio de cada unidade.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "06-dashboard-do-associado.png",
+      "title": "Análise individual da unidade",
+      "description": "Dashboard com seis meses de histórico, evolução das vendas e resultado consolidado.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "07-gestao-de-associados.png",
+      "title": "Gestão de unidades",
+      "description": "Consulta das unidades por localização, consultor, grupo econômico e status.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "08-detalhes-do-associado.png",
+      "title": "Cadastro completo da unidade",
+      "description": "Dados cadastrais, contato e informações complementares com documentos e contatos fictícios.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "09-certificados-digitais.png",
+      "title": "Gestão de certificados",
+      "description": "Validades e alertas de vencimento para organizar o acompanhamento de cada unidade.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "10-consulta-inteligente.png",
+      "title": "Consulta em linguagem natural",
+      "description": "Exemplo demonstrativo de pergunta e resposta sobre faturamento, com resumo e tabela de unidades.",
+      "viewport": {
+        "width": 1600,
+        "height": 1120
+      },
+      "pixels": {
+        "width": 3200,
+        "height": 2240
+      },
+      "mobile": false,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "11-score-no-celular.png",
+      "title": "Desempenho no celular",
+      "description": "Indicadores, distribuição das pontuações e destaques da rede na versão móvel.",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      },
+      "pixels": {
+        "width": 1290,
+        "height": 3000
+      },
+      "mobile": true,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    },
+    {
+      "file": "12-certificados-no-celular.png",
+      "title": "Prazos na palma da mão",
+      "description": "Resumo dos certificados e filtros de acompanhamento no celular.",
+      "viewport": {
+        "width": 430,
+        "height": 1000
+      },
+      "pixels": {
+        "width": 1290,
+        "height": 3000
+      },
+      "mobile": true,
+      "audit": {
+        "originalLogo": false,
+        "anonymized": true
+      }
+    }
+  ]
+}

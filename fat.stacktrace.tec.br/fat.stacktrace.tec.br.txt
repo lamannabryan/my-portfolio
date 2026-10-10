@@ -1,0 +1,29 @@
+Transforme os dados da sua rede em decisões mais claras e oportunidades de crescimento.
+
+Desenvolvida para redes com múltiplas unidades, esta plataforma reúne gestão de unidades, indicadores de desempenho, análises com inteligência artificial e acompanhamento da expansão em um único ambiente web. Uma solução para quem precisa enxergar os resultados da rede como um todo, sem perder os detalhes de cada unidade.
+
+Ao centralizar informações cadastrais, comerciais e operacionais, a aplicação facilita o acompanhamento das unidades, reduz a dispersão de dados em planilhas e oferece uma base organizada para o trabalho de gestores, consultores e equipes comerciais.
+
+Entre suas funcionalidades estão:
+
+- **Painel de indicadores:** acompanhe faturamento, compras, volume de transações, ticket médio e descontos, com gráficos e comparativos entre períodos para identificar variações nos resultados.
+
+- **Análise por unidade e grupo econômico:** consulte o desempenho individual das unidades e os resultados consolidados de unidades pertencentes ao mesmo grupo, além de indicadores financeiros e operacionais.
+
+- **Relatórios e acompanhamento de metas:** visualize a evolução do faturamento, compare resultados com períodos anteriores e acompanhe o atingimento das metas informadas.
+
+- **Inteligência artificial aplicada à gestão:** faça perguntas em linguagem natural sobre os dados da operação e obtenha análises que apoiam a identificação de riscos, oportunidades e prioridades, incluindo estimativas para os próximos períodos.
+
+- **Score e ranking das unidades:** compare as pontuações das unidades, identifique destaques e explore a relação entre avaliação e faturamento para orientar o acompanhamento da rede.
+
+- **Gestão de unidades e parceiros:** centralize cadastros, contatos, responsáveis, grupos econômicos e participação em programas. Consulte o histórico de alterações das unidades e compartilhe movimentações com a equipe por e-mail.
+
+- **CRM para expansão:** organize oportunidades de novas unidades, registre contatos e visitas, acompanhe etapas de negociação e defina as próximas datas de contato.
+
+- **Controle de validade de certificados digitais:** identifique certificados vencidos e próximos do vencimento, facilitando a priorização das ações de regularização.
+
+- **Importação e organização de dados:** consolide informações de vendas, compras, cadastros e indicadores a partir de planilhas. Conte também com exportação de cadastros, consulta de relatórios por API e geração de arquivos para revistas promocionais.
+
+- **Acesso por perfil de usuário:** disponibilize os recursos conforme as responsabilidades de administração, operação e expansão.
+
+Com informações reunidas e recursos voltados à gestão de redes e unidades, a plataforma ajuda sua equipe a reconhecer unidades que precisam de atenção, acompanhar iniciativas comerciais e planejar o crescimento da rede com mais clareza.

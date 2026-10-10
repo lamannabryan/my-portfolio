@@ -1,0 +1,31 @@
+**Conecte sua rede. Simplifique a rotina. Acompanhe os resultados.**
+
+Administrar uma rede exige comunicação clara, informações acessíveis e proximidade com cada unidade. Nossa plataforma reúne essas necessidades em um único portal, conectando a gestão central às unidades e facilitando o acesso aos recursos utilizados no dia a dia.
+
+A solução centraliza comunicados, documentos, boletos, indicadores de desempenho e serviços de apoio. Com acesso pelo computador ou celular, oferece mais autonomia às unidades e ajuda a reduzir solicitações repetitivas à equipe administrativa.
+
+Entre suas funcionalidades estão:
+
+- **Comunicação com toda a rede:** publicação de comunicados com textos e imagens, notificações e destaques para manter as unidades informadas sobre campanhas, novidades e orientações.
+
+- **Central de documentos e materiais comerciais:** organização de arquivos em pastas, com busca, visualização e download. Facilita a distribuição de materiais de campanha, manuais, orientações e documentos de apoio à operação.
+
+- **Indicadores de desempenho e BI:** acompanhamento de faturamento, compras, ticket médio e volume de transações, com gráficos de evolução mensal e comparativos entre períodos. Os painéis utilizam dados disponibilizados pela integração de relatórios, apoiando a análise dos resultados.
+
+- **Visão de múltiplas unidades:** gestores podem acessar as unidades vinculadas ao seu perfil, consultar informações individualmente e acompanhar indicadores consolidados do grupo.
+
+- **Consulta de boletos:** disponibilização do boleto mais recente vinculado a cada unidade, com acesso para download. A administração conta com recursos de envio de arquivos e importação de vínculos, facilitando a distribuição.
+
+- **Acompanhamento de certificados digitais:** consulta de validade, envio de certificados para análise e acompanhamento da aprovação. A plataforma oferece alertas automáticos por e-mail antes do vencimento e após a expiração, além de notificações sobre aprovação ou reprovação do envio.
+
+- **Diretório de parceiros e fornecedores:** consulta por nome ou categoria, com informações comerciais, contatos e canais de pedido. Um ponto de referência para aproximar as unidades das empresas que atendem à rede.
+
+- **Acesso a suporte, sistemas e orientações:** atalhos para contato com o consultor responsável pelo WhatsApp, portais de compras, plataformas de treinamento e outros serviços utilizados pela rede, além de tutoriais em vídeo.
+
+- **Recursos para eventos e engajamento:** páginas de encontros corporativos com programação, destaque da atividade em andamento e lembretes no navegador mediante autorização. Pesquisas de satisfação e quizzes interativos complementam a experiência, com consulta de avaliações, comentários e resultados.
+
+- **Painel administrativo e gestão de acessos:** gerenciamento de usuários, perfis, grupos econômicos, documentos, parceiros e comunicados. A equipe responsável também acompanha certificados enviados, históricos de notificações e resultados das pesquisas em áreas administrativas específicas.
+
+Ao reunir informações e serviços em um ambiente comum, a plataforma ajuda a padronizar a comunicação, agilizar o acesso a documentos e dar mais visibilidade ao desempenho das unidades. Para as equipes locais, representa praticidade e autonomia. Para a gestão, oferece organização e recursos para acompanhar e apoiar toda a rede.
+
+**Aproxime sua gestão de cada unidade e transforme o portal da sua rede em uma ferramenta de uso diário.**
