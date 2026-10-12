@@ -10,7 +10,6 @@
     <meta name="theme-color" content="#151515" />
     <title>_StackTrace</title>
     <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg" />
-    <link rel="preload" as="image" href="src/assets/hero-origami-bear_resultado.webp" fetchpriority="high" />
     <script>
       document.documentElement.classList.add("is-loading");
     </script>
@@ -74,9 +73,10 @@
 
     <main>
       <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <canvas class="hero-particles" data-hero-particles aria-hidden="true"></canvas>
         <div class="hero-copy reveal">
           <p class="eyebrow">Estúdio de tecnologia web</p>
-          <h1 id="hero-title">Soluções digitais com design, código e estratégia.</h1>
+          <h1 id="hero-title">Soluções digitais com <span class="hero-gradient">design</span>, <span class="hero-gradient">código</span> e <span class="hero-gradient">estratégia</span>.</h1>
           <p>
             A _StackTrace desenvolve sites premium, interfaces, sistemas corporativos,
             aplicativos mobile e integrações com IA. <br />
@@ -88,8 +88,11 @@
             <a class="button button-ghost" href="#servicos">Ver serviços</a>
           </div>
         </div>
-
-
+        <div class="hero-particle-stage" aria-hidden="true"></div>
+        <button class="hero-cursor-rest" type="button" data-cursor-rest>
+          <span class="hero-cursor-rest-icon" aria-hidden="true">↖</span>
+          <span><strong>Formar o urso</strong><small>Repouse o cursor aqui</small></span>
+        </button>
       </section>
 
       <section class="section services" id="servicos" style="margin-bottom: 0; padding-bottom: 0;">
@@ -534,5 +537,6 @@
     </footer>
 
     <script src="src/scripts/app.js"></script>
+    <script src="src/scripts/hero-particles.js"></script>
   </body>
 </html>

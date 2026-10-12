@@ -340,21 +340,22 @@ textarea:focus-visible {
 }
 
 .hero {
-  --hero-image-opacity: 1;
-  --hero-image-size: min(90vw, 78%);
-  --hero-parallax: 0px;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.36fr);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.65fr);
   gap: clamp(24px, 5vw, 64px);
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  /* Compensate for body zoom so the visible hero fills the viewport. */
+  height: calc(100vh / var(--page-scale));
+  min-height: 0;
   margin: 0;
   padding: 126px max(16px, calc((100vw - 1180px) / 2)) 72px;
   color: var(--white);
   overflow: hidden;
-  background: var(--ink);
+  background:
+    radial-gradient(ellipse at 78% 42%, rgba(226, 26, 89, 0.065), transparent 58%),
+    linear-gradient(125deg, #101010 0%, #191718 58%, #111111 100%);
   isolation: isolate;
 }
 
@@ -368,31 +369,88 @@ textarea:focus-visible {
   pointer-events: none;
 }
 
-.hero::after {
+.hero-particles {
   position: absolute;
   inset: 0;
   z-index: 0;
-  content: "";
-  background:
-    linear-gradient(
-      90deg,
-      var(--ink) 0%,
-      rgba(21, 21, 21, 0.98) 38%,
-      rgba(21, 21, 21, 0.064) 62%,
-      rgba(21, 21, 21, 0) 100%
-    ),
-    linear-gradient(180deg, rgba(21, 21, 21, 0.02), rgba(21, 21, 21, 0.58)),
-    url("../assets/hero-origami-bear_resultado.webp") right top / var(--hero-image-size) auto no-repeat;
-  opacity: var(--hero-image-opacity);
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  transform: translate3d(0, var(--hero-parallax), 0);
-  transform-origin: right top;
-  will-change: transform;
 }
 
 .hero-copy {
   position: relative;
   z-index: 1;
+}
+
+.hero-particle-stage {
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  justify-self: center;
+  pointer-events: none;
+}
+
+.hero-cursor-rest {
+  position: absolute;
+  right: clamp(26px, 3vw, 56px);
+  bottom: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  color: rgba(255, 255, 255, 0.78);
+  background: #1b1719;
+  border: 1px dashed rgba(226, 26, 89, 0.65);
+  border-radius: 12px;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.hero-cursor-rest strong,
+.hero-cursor-rest small {
+  display: block;
+}
+
+.hero-cursor-rest strong {
+  font-size: 0.78rem;
+}
+
+.hero-cursor-rest small {
+  margin-top: 4px;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.hero-cursor-rest-icon {
+  color: var(--red);
+  font-size: 1.65rem;
+}
+
+.hero-cursor-rest:hover,
+.hero-cursor-rest:focus-visible {
+  background: #301820;
+  border-color: var(--red);
+  border-style: solid;
+}
+
+.hero-cursor-rest:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+
+@media (hover: none) {
+  .hero-cursor-rest {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor-rest {
+    transition: none;
+  }
 }
 
 .eyebrow {
@@ -422,6 +480,40 @@ section {
 
 .hero h1 {
   font-size: clamp(2rem, 4.5vw, 4.5rem);
+  padding-bottom: 0.12em;
+  color: var(--white);
+}
+
+.hero-gradient {
+  display: inline-block;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  color: #ffadc6;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .hero-gradient {
+    background-image: linear-gradient(110deg, #ffadc6 0%, #ff709e 22%, #ffbd8a 44%, #ff8b70 66%, #ffadc6 100%);
+    background-size: 250% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: hero-title-gradient 9s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes hero-title-gradient {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+.hero.is-animation-paused .hero-gradient {
+  animation-play-state: paused;
 }
 
 .title-mark {
@@ -1814,13 +1906,20 @@ section {
   }
 
   .hero {
-    --hero-image-size: min(72vw, 680px);
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
     padding-top: 120px;
   }
 
   .hero-badge {
     justify-self: start;
+  }
+
+  .hero-particle-stage {
+    width: min(72vw, 340px);
+    height: 100%;
+    max-height: 340px;
+    min-height: 0;
   }
 
   .service-grid,
@@ -2029,16 +2128,7 @@ section {
   }
 
   .hero {
-    --hero-image-opacity: 0.34;
-    min-height: 100vh;
-    min-height: 100svh;
     padding: 112px 14px 54px;
-    background: var(--ink);
-  }
-
-  .hero::after {
-    background: url("../assets/hero-origami-bear_resultado.webp") center center / cover no-repeat;
-    transform: none;
   }
 
   .hero::before {
@@ -2239,8 +2329,8 @@ section {
     opacity: 1;
   }
 
-  .hero::after {
-    transform: none;
+  .hero-gradient {
+    animation: none;
   }
 
   .services-visual img {

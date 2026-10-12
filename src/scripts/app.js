@@ -1,5 +1,4 @@
 const header = document.querySelector("[data-header]");
-const hero = document.querySelector(".hero");
 const servicesVisuals = Array.from(document.querySelectorAll(".services-visual"));
 const year = document.querySelector("[data-year]");
 const nav = document.querySelector("[data-nav]");
@@ -70,18 +69,6 @@ Promise.race([initialImagesReady, loaderFallback]).then(showPage);
 
 const updateHeader = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 24);
-};
-
-const updateHeroParallax = () => {
-  if (!hero) {
-    return;
-  }
-
-  const rect = hero.getBoundingClientRect();
-  const progress = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
-  const parallax = progress * 96;
-
-  hero.style.setProperty("--hero-parallax", `${parallax.toFixed(1)}px`);
 };
 
 const updateServicesParallax = () => {
@@ -463,7 +450,6 @@ const updateProcessProgress = () => {
 
 year.textContent = new Date().getFullYear();
 updateHeader();
-updateHeroParallax();
 updateServicesParallax();
 updateActiveLink();
 updateScrollPanels();
@@ -558,7 +544,6 @@ let scrollFrame = null;
 
 const updateScrollState = () => {
   updateHeader();
-  updateHeroParallax();
   updateServicesParallax();
   updateActiveLink();
   updateScrollPanels();
@@ -590,7 +575,6 @@ window.addEventListener("resize", () => {
   }
 
   syncMenuAccessibility();
-  updateHeroParallax();
   updateServicesParallax();
   updateActiveLink();
   updateScrollPanels();
