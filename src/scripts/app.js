@@ -150,53 +150,26 @@ const setContactStatus = (message, state = "idle") => {
   contactStatus.hidden = !message;
 };
 
-const setContactSubmitting = (isSubmitting) => {
-  const submitButton = contactForm?.querySelector("button[type='submit']");
-
-  if (!submitButton) {
-    return;
-  }
-
-  if (!submitButton.dataset.defaultText) {
-    submitButton.dataset.defaultText = submitButton.textContent.trim();
-  }
-
-  submitButton.disabled = isSubmitting;
-  submitButton.textContent = isSubmitting ? "Enviando..." : submitButton.dataset.defaultText;
-};
-
-const handleContactSubmit = async (event) => {
+const handleContactSubmit = (event) => {
   event.preventDefault();
 
   const formData = new FormData(contactForm);
+  const message = [
+    "Olá! Quero conversar sobre um projeto com a _StackTrace.",
+    "Nome: " + String(formData.get("name") || "Não informado").trim(),
+    "E-mail: " + String(formData.get("email") || "Não informado").trim(),
+    "WhatsApp: " + String(formData.get("whatsapp") || "Não informado").trim(),
+    "Tipo de projeto: " + String(formData.get("tipo_de_projeto") || "Não informado").trim(),
+    "Mensagem: " + String(formData.get("message") || "Não informada").trim(),
+  ].join("\n");
+  const url = "https://wa.me/5551994612246?text=" + encodeURIComponent(message);
+  const whatsappWindow = window.open(url, "_blank", "noopener,noreferrer");
 
-  if (String(formData.get("_honey") || "").trim()) {
-    contactForm.reset();
-    setContactStatus("Mensagem enviada com sucesso.", "success");
-    return;
-  }
-
-  setContactSubmitting(true);
-  setContactStatus("Enviando mensagem...", "loading");
-
-  try {
-    const response = await fetch(contactForm.dataset.contactEndpoint || contactForm.action, {
-      body: formData,
-      method: "POST",
-    });
-    const result = await response.json().catch(() => ({}));
-    const success = response.ok && (result.success || result.message || result.status === "success");
-
-    if (!success) {
-      throw new Error(result.message || "Nao foi possivel enviar a mensagem.");
-    }
-
-    contactForm.reset();
-    setContactStatus("Mensagem enviada com sucesso. Em breve entraremos em contato.", "success");
-  } catch (error) {
-    setContactStatus(error.message || "Nao foi possivel enviar a mensagem.", "error");
-  } finally {
-    setContactSubmitting(false);
+  contactForm.reset();
+  if (whatsappWindow) {
+    setContactStatus("Mensagem preparada. O WhatsApp foi aberto em uma nova aba.", "success");
+  } else {
+    setContactStatus("Não foi possível abrir o WhatsApp. Verifique o bloqueador de pop-ups.", "error");
   }
 };
 
