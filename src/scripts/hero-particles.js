@@ -200,7 +200,9 @@
     for (const [from, to] of segments) {
       const start = vertices[from];
       const end = vertices[to];
-      const steps = Math.max(1, Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) / 22));
+      const originalCount = Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) / 22) + 1;
+      // Halve the particle count while preserving both endpoints of each fold.
+      const steps = Math.max(2, Math.round(originalCount / 2)) - 1;
       for (let i = 0; i <= steps; i += 1) {
         const progress = i / steps;
         addParticle(start[0] + (end[0] - start[0]) * progress, start[1] + (end[1] - start[1]) * progress);

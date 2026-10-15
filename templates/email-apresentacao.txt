@@ -1,0 +1,26 @@
+Assunto: {{empresa}} + StackTrace: vamos conversar sobre tecnologia?
+
+Olá, {{nome}}! Tudo bem?
+
+Gostaria de apresentar a StackTrace, um estúdio de tecnologia que desenvolve sites, sistemas web, aplicativos e integrações com inteligência artificial.
+
+Criamos soluções para organizar processos, conectar informações e tornar os dados mais úteis para a gestão. Também ajudamos empresas a fortalecer sua presença digital com interfaces claras e responsivas.
+
+Nosso trabalho combina design e desenvolvimento, do planejamento à entrega, com suporte para a evolução do projeto.
+
+Dois exemplos para redes, franquias e cooperativas:
+
+• FAT — Gestão e indicadores: faturamento, desempenho das unidades, gestão de unidades e análises com IA em um único ambiente.
+  https://stacktrace.tec.br/projetos/fat/
+
+• Score — Auditoria operacional: avaliações com 36 critérios, evidências em fotos e pontuação para acompanhar cada unidade da rede.
+  https://stacktrace.tec.br/projetos/score/
+
+Para começar, podemos oferecer uma análise da presença digital da {{empresa}}, feita por um especialista da StackTrace, com sugestões de melhoria. Tem interesse? Basta responder a este email com o site ou perfil que gostaria de avaliar.
+
+Um abraço,
+Equipe StackTrace
+
+https://stacktrace.tec.br/
+WhatsApp: (51) 99461-2246
+https://wa.me/5551994612246
